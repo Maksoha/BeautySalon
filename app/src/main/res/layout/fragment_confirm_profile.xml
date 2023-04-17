@@ -1,0 +1,45 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="ru.example.beautysalon.ui.view.profile.ConfirmProfileFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:layout_width="256dp"
+        android:layout_height="256dp"
+        android:id="@+id/fragment_booking_confirmProfile_image"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="72dp"
+        android:src="@drawable/message"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fragment_booking_confirmProfile_text"
+        android:text="Активация аккаунта"
+        android:gravity="center"
+        style="@style/TextAppearance.Material3.HeadlineMedium"
+        app:layout_constraintTop_toBottomOf="@id/fragment_booking_confirmProfile_image"/>
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fragment_booking_confirmProfile_textField"
+        android:hint="Код активации"
+        style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
+        app:layout_constraintTop_toBottomOf="@id/fragment_booking_confirmProfile_text">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"/>
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:id="@+id/fragment_booking_confirmProfile_button"
+        app:layout_constraintTop_toBottomOf="@id/fragment_booking_confirmProfile_textField"
+        android:text="Подтвердить"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

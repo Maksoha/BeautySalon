@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.button.MaterialButtonToggleGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:selectionRequired="true"
+        app:singleSelection="true"
+        android:gravity="center"
+        android:id="@+id/fragment_booking_button_toggle_group"
+        app:layout_constraintTop_toTopOf="parent"
+        style="Material3.button"
+        app:checkedButton="@id/fragment_booking_button_selected_at_the_salon">
+        <Button
+            android:layout_width="108dp"
+            android:layout_height="54dp"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:id="@+id/fragment_booking_button_selected_at_the_salon"
+            android:text="В салоне" />
+        <Button
+            android:layout_width="108dp"
+            android:layout_height="54dp"
+            style="@style/Widget.Material3.Button.OutlinedButton"
+            android:id="@+id/fragment_booking_button_selected_at_home"
+            android:text="На дому"/>
+    </com.google.android.material.button.MaterialButtonToggleGroup>
+<!--    <androidx.fragment.app.FragmentContainerView-->
+<!--        android:id="@+id/fragmentContainerView"-->
+<!--        android:name="androidx.navigation.fragment.NavHostFragment"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:defaultNavHost="true"-->
+<!--        app:navGraph="@navigation/nav_graph_booking_location"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/fragment_booking_button_toggle_group"/>-->
+    <com.google.android.material.tabs.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fragment_booking_tab_layout"
+        app:tabMode="scrollable"
+        app:layout_constraintTop_toBottomOf="@id/fragment_booking_button_toggle_group"/>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/fragment_booking_viewPager"
+        app:layout_constraintTop_toBottomOf="@id/fragment_booking_tab_layout"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

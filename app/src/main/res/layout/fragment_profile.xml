@@ -1,0 +1,52 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="ru.example.beautysalon.ui.view.profile.ProfileFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="128dp"
+        android:id="@+id/fragment_profile_cardView_header"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/CardView_profile">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fragment_profile_cardView_header_name"
+            android:text="Имя пользователя"
+            android:layout_gravity="center"
+            android:textColor="@color/onPrimaryContainer"
+            style="@style/headline_medium">
+        </TextView>
+    </com.google.android.material.card.MaterialCardView>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:contentPadding="16dp"
+        android:layout_marginVertical="36dp"
+        android:layout_marginHorizontal="16dp"
+        app:cardCornerRadius="8dp"
+        app:cardBackgroundColor="@color/secondaryContainer"
+        android:id="@+id/fragment_profile_cardView_menu"
+        app:layout_constraintTop_toBottomOf="@id/fragment_profile_cardView_header"
+        app:layout_constraintBottom_toTopOf="@id/fragment_profile_button_exit">
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </androidx.recyclerview.widget.RecyclerView>
+    </androidx.cardview.widget.CardView>
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fragment_profile_button_exit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="24dp"
+        android:text="Выйти из аккаунта"
+        android:textColor="@color/onError"
+        style="@style/Button_exit_account">
+    </com.google.android.material.button.MaterialButton>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

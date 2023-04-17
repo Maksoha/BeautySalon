@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.MaterialComponents.CardView.ItemSpecialistCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/surface</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">@color/outlineVariant</item>
+        <item name="cardCornerRadius">16dp</item>
+    </style>
+    <style name="Widget.MaterialComponents.CardView.ItemServiceCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">12dp</item>
+        <item name="cardBackgroundColor">@color/secondaryContainer</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">@color/outlineVariant</item>
+    </style>
+    <style name="Widget.MaterialComponents.CardView.ItemSaleCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardBackgroundColor">@color/surfaceVariant</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">@color/outlineVariant</item>
+    </style>
+    <style name="CardView_profile" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay_card_bottom_corners</item>
+        <item name="cardBackgroundColor">@color/primaryContainer</item>
+    </style>
+    <style name="ShapeAppearanceOverlay_card_bottom_corners" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomRight">32dp</item>
+        <item name="cornerSizeBottomLeft">32dp</item>
+    </style>
+    <style name="Button_exit_account" parent="@style/Widget.MaterialComponents.Button">
+        <item name="android:colorBackground">@color/error</item>
+    </style>
+    <style name="Widget.MaterialComponents.CardView.ServiceConfirm" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardBackgroundColor">@color/surfaceVariant</item>
+    </style>
+    <style name="Widget.MaterialComponents.CardView.ItemServiceBookingCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardBackgroundColor">@color/secondaryContainer</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">@color/outlineVariant</item>
+    </style>
+</resources>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="ru.example.beautysalon.ui.view.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_sale"
+        android:name="ru.example.beautysalon.ui.view.sale.SaleFragment"
+        android:label="@string/title_sale"
+        tools:layout="@layout/fragment_sale" />
+
+    <fragment
+        android:id="@+id/navigation_booking"
+        android:name="ru.example.beautysalon.ui.view.booking.BookingFragment"
+        android:label="@string/title_booking"
+        tools:layout="@layout/fragment_booking" />
+
+    <fragment
+        android:id="@+id/navigation_map"
+        android:name="ru.example.beautysalon.ui.view.map.MapsFragment"
+        android:label="@string/title_map"
+        tools:layout="@layout/fragment_maps"/>
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="ru.example.beautysalon.ui.view.profile.StartProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_start_profile"/>
+
+</navigation>

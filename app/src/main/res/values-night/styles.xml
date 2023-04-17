@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.MaterialComponents.CardView.ItemSpecialistCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/surface</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="strokeColor">@color/outlineVariant</item>
+        <item name="cardCornerRadius">16dp</item>
+    </style>
+    <style name="Widget.MaterialComponents.CardView.ItemServiceCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">12dp</item>
+        <item name="cardBackgroundColor">@color/secondaryContainer</item>
+    </style>
+    <style name="Widget.MaterialComponents.CardView.ItemSaleCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardBackgroundColor">@color/surfaceVariant</item>
+    </style>
+</resources>

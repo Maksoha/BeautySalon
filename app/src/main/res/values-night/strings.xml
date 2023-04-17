@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="salon_name">Салон Красоты</string>
+    <string name="title_sale">Акции</string>
+    <string name="title_booking">Запись</string>
+    <string name="title_profile">Профиль</string>
+</resources>

@@ -1,0 +1,26 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.BeautySalonTest" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/primary_80</item>
+        <item name="colorOnPrimary">@color/primary_20</item>
+        <!--        <item name="colorPrimaryVariant">@color/purple_700</item>-->
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/secondary_80</item>
+        <!--        <item name="colorSecondaryVariant">@color/teal_700</item>-->
+        <item name="colorOnSecondary">@color/secondary_20</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Background color. -->
+        <item name="backgroundColor">@color/neutral_10</item>
+        <item name="colorOnBackground">@color/neutral_90</item>
+        <!-- Error color. -->
+        <item name="colorError">@color/error_80</item>
+        <item name="colorOnError">@color/error_20</item>
+        <!-- Surface color. -->
+        <item name="colorSurface">@color/neutral_10</item>
+        <item name="colorOnSurface">@color/neutral_90</item>
+
+    </style>
+
+</resources>
