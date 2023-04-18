@@ -2,11 +2,12 @@ package ru.example.beautysalon.data.models;
 
 public class ServiceModel {
 
-    private String name, value, type;
+    private String name, type;
+    private int price;
 
-    public ServiceModel(String name, String value, String type) {
+    public ServiceModel(String type, String name, int price) {
         this.name = name;
-        this.value = value;
+        this.price = price;
         this.type = type;
     }
 
@@ -14,8 +15,8 @@ public class ServiceModel {
         return name;
     }
 
-    public String getValue() {
-        return value;
+    public int getPrice() {
+        return price;
     }
 
     public String getType() {

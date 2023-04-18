@@ -8,23 +8,23 @@ import ru.example.beautysalon.data.models.ServiceModel;
 
 @Entity
 public class ServiceEntity {
-
-    @PrimaryKey (autoGenerate = true)
+    @PrimaryKey(autoGenerate = true)
     public int id;
 
     @ColumnInfo
-    public String name, price, type;
+    public String type, name;
 
+    @ColumnInfo
+    public int price;
 
     public ServiceEntity() {
     }
 
-    public ServiceEntity(String name, String price, String type) {
+    public ServiceEntity(String type, String name, int price) {
+        this.type = type;
         this.name = name;
         this.price = price;
     }
 
-    public ServiceModel toDomainMode() {
-        return new ServiceModel(name, price, type);
-    }
+    public ServiceModel toDomainMode() {return new ServiceModel(type, name, price);}
 }

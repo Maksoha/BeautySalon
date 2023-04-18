@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,10 +14,8 @@ import android.view.ViewGroup;
 
 import com.example.beautysalontest.databinding.FragmentFacialBinding;
 
-import java.util.Objects;
-
-import ru.example.beautysalon.ui.adapters.CardSpecialist_RecyclerViewAdapter;
-import ru.example.beautysalon.ui.viewModel.FacialViewModel;
+import ru.example.beautysalon.ui.adapters.SpecialistAdapter;
+import ru.example.beautysalon.ui.viewModel.viewPagerSpecialist.FacialViewModel;
 
 
 public class FacialFragment extends Fragment {
@@ -56,12 +54,9 @@ public class FacialFragment extends Fragment {
     }
 
     private void setRecyclerView_specialistCard() {
-        binding.fragmentFacialRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL, false));
-        binding.fragmentFacialRecyclerView.setAdapter(new CardSpecialist_RecyclerViewAdapter());
-
-        facialViewModel.getItemsSpecialist().observe(getViewLifecycleOwner(), value -> {
-            ((CardSpecialist_RecyclerViewAdapter) Objects.requireNonNull(binding.fragmentFacialRecyclerView.getAdapter())).updateData(value);
-        });
-
+        SpecialistAdapter specialistAdapter = new SpecialistAdapter(new SpecialistAdapter.SpecialistDiff());
+        binding.fragmentFacialRecyclerView.setAdapter(specialistAdapter);
+        binding.fragmentFacialRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        facialViewModel.getItemsSpecialist().observe(getViewLifecycleOwner(), specialistAdapter::submitList);
     }
 }

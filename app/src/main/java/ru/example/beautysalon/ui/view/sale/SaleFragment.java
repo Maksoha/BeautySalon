@@ -5,7 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,9 +13,8 @@ import android.view.ViewGroup;
 
 import com.example.beautysalontest.databinding.FragmentSaleBinding;
 
-import java.util.Objects;
-
-import ru.example.beautysalon.ui.adapters.CardSale_RecyclerViewAdapter;
+import ru.example.beautysalon.ui.adapters.SaleAdapter;
+import ru.example.beautysalon.ui.adapters.SpecialistAdapter;
 import ru.example.beautysalon.ui.viewModel.SaleViewModel;
 
 public class SaleFragment extends Fragment {
@@ -53,13 +52,9 @@ public class SaleFragment extends Fragment {
     }
 
     private void setRecyclerView_cardSale() {
-        binding.fragmentSaleRecyclerViewSale.setLayoutManager(new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL, false));
-        binding.fragmentSaleRecyclerViewSale.setAdapter(new CardSale_RecyclerViewAdapter());
-
-        saleViewModel.getItemsSale().observe(getViewLifecycleOwner(), value -> {
-            if (!value.isEmpty()) {
-                ((CardSale_RecyclerViewAdapter) Objects.requireNonNull(binding.fragmentSaleRecyclerViewSale.getAdapter())).updateData(value);
-            }
-        });
+        SaleAdapter specialistAdapter = new SaleAdapter(new SaleAdapter.SaleDiff());
+        binding.fragmentSaleRecyclerViewSale.setAdapter(specialistAdapter);
+        binding.fragmentSaleRecyclerViewSale.setLayoutManager(new LinearLayoutManager(getContext()));
+        saleViewModel.getItemsSale().observe(getViewLifecycleOwner(), specialistAdapter::submitList);
     }
 }

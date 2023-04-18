@@ -9,21 +9,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.beautysalontest.databinding.FragmentBrowsLashesBinding;
 
-import java.util.Objects;
+import ru.example.beautysalon.ui.adapters.ServiceAdapter;
+import ru.example.beautysalon.ui.adapters.SpecialistAdapter;
+import ru.example.beautysalon.ui.viewModel.viewPagerService.BrowsLashesServiceViewModel;
+import ru.example.beautysalon.ui.viewModel.viewPagerSpecialist.BrowsLashesViewModel;
 
-import ru.example.beautysalon.ui.adapters.CardSpecialist_RecyclerViewAdapter;
-import ru.example.beautysalon.ui.viewModel.BrowsLashesViewModel;
 
-
-public class BrowsLashesFragment extends Fragment {
+public class BrowsLashesServiceFragment extends Fragment {
 
     private FragmentBrowsLashesBinding binding;
 
-    private BrowsLashesViewModel browsLashesViewModel;
+    private BrowsLashesServiceViewModel browsLashesViewModel;
 
 
     @Override
@@ -44,7 +44,7 @@ public class BrowsLashesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        browsLashesViewModel = new ViewModelProvider(this).get(BrowsLashesViewModel.class);
+        browsLashesViewModel = new ViewModelProvider(this).get(BrowsLashesServiceViewModel.class);
         setRecyclerView_specialistCard();
     }
 
@@ -55,12 +55,10 @@ public class BrowsLashesFragment extends Fragment {
     }
 
     private void setRecyclerView_specialistCard() {
-        binding.fragmentBrowsLashesRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL, false));
-        binding.fragmentBrowsLashesRecyclerView.setAdapter(new CardSpecialist_RecyclerViewAdapter());
-
-        browsLashesViewModel.getItemsSpecialist().observe(getViewLifecycleOwner(), value -> {
-            ((CardSpecialist_RecyclerViewAdapter) Objects.requireNonNull(binding.fragmentBrowsLashesRecyclerView.getAdapter())).updateData(value);
-        });
+        ServiceAdapter serviceAdapter = new ServiceAdapter(new ServiceAdapter.ServiceDiff());
+        binding.fragmentBrowsLashesRecyclerView.setAdapter(serviceAdapter);
+        binding.fragmentBrowsLashesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        browsLashesViewModel.getItemsSpecialist().observe(getViewLifecycleOwner(), serviceAdapter::submitList);
 
     }
 }

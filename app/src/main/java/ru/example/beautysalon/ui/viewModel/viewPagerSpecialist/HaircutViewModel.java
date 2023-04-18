@@ -1,4 +1,4 @@
-package ru.example.beautysalon.ui.viewModel;
+package ru.example.beautysalon.ui.viewModel.viewPagerSpecialist;
 
 import android.app.Application;
 
@@ -11,15 +11,14 @@ import java.util.List;
 import ru.example.beautysalon.data.models.CardSpecialistModel;
 import ru.example.beautysalon.data.repositories.CardSpecialistRepository;
 
-public class FacialViewModel extends AndroidViewModel {
+public class HaircutViewModel extends AndroidViewModel {
     private CardSpecialistRepository specialistRepository;
     private LiveData<List<CardSpecialistModel>> itemsSpecialist;
 
-    public FacialViewModel(@NonNull Application application) {
+    public HaircutViewModel(@NonNull Application application) {
         super(application);
         specialistRepository = new CardSpecialistRepository(application);
-        itemsSpecialist = specialistRepository.getDatabaseDataFacial();
-
+        itemsSpecialist = specialistRepository.getDatabaseDataHaircut();
     }
 
     public LiveData<List<CardSpecialistModel>> getItemsSpecialist() {

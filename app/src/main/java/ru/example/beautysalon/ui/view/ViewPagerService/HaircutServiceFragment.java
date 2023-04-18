@@ -9,22 +9,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.beautysalontest.databinding.FragmentHaircutBinding;
 
-import java.util.Objects;
+import ru.example.beautysalon.ui.adapters.ServiceAdapter;
+import ru.example.beautysalon.ui.adapters.SpecialistAdapter;
+import ru.example.beautysalon.ui.viewModel.viewPagerService.HaircutServiceViewModel;
+import ru.example.beautysalon.ui.viewModel.viewPagerSpecialist.HaircutViewModel;
 
-import ru.example.beautysalon.ui.adapters.CardSpecialist_RecyclerViewAdapter;
-import ru.example.beautysalon.ui.viewModel.HaircutViewModel;
 
-
-public class HaircutFragment extends Fragment {
+public class HaircutServiceFragment extends Fragment {
 
 
     private FragmentHaircutBinding binding;
 
-    private HaircutViewModel haircutViewModel;
+    private HaircutServiceViewModel haircutViewModel;
 
 
     @Override
@@ -45,7 +45,7 @@ public class HaircutFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        haircutViewModel = new ViewModelProvider(this).get(HaircutViewModel.class);
+        haircutViewModel = new ViewModelProvider(this).get(HaircutServiceViewModel.class);
         setRecyclerView_specialistCard();
     }
 
@@ -56,12 +56,10 @@ public class HaircutFragment extends Fragment {
     }
 
     private void setRecyclerView_specialistCard() {
-        binding.fragmentHaircutRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL, false));
-        binding.fragmentHaircutRecyclerView.setAdapter(new CardSpecialist_RecyclerViewAdapter());
-
-        haircutViewModel.getItemsSpecialist().observe(getViewLifecycleOwner(), value -> {
-            ((CardSpecialist_RecyclerViewAdapter) Objects.requireNonNull(binding.fragmentHaircutRecyclerView.getAdapter())).updateData(value);
-        });
+        ServiceAdapter serviceAdapter = new ServiceAdapter(new ServiceAdapter.ServiceDiff());
+        binding.fragmentHaircutRecyclerView.setAdapter(serviceAdapter);
+        binding.fragmentHaircutRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        haircutViewModel.getItemsSpecialist().observe(getViewLifecycleOwner(), serviceAdapter::submitList);
 
     }
 }

@@ -1,36 +1,38 @@
 package ru.example.beautysalon.data.data_sources.room.dao;
 
 import androidx.lifecycle.LiveData;
+import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.Query;
 
 import java.util.List;
 
-import ru.example.beautysalon.data.data_sources.room.entities.CardSpecialistEntity;
 import ru.example.beautysalon.data.data_sources.room.entities.ServiceEntity;
 
+@Dao
 public interface ServiceDao {
 
     @Query("SELECT * FROM ServiceEntity ORDER BY name ASC")
-    LiveData<List<CardSpecialistEntity>> getAllItems();
+    LiveData<List<ServiceEntity>> getAllItems();
 
-    @Query("SELECT * FROM ServiceEntity WHERE name = \"Лашмейкер\" ORDER BY name ASC")
-    LiveData<List<CardSpecialistEntity>> getBrowsLashes();
 
-    @Query("SELECT * FROM ServiceEntity WHERE name = \"Косметолог\" ORDER BY name ASC")
-    LiveData<List<CardSpecialistEntity>> getFacial();
+    @Query("SELECT * FROM ServiceEntity WHERE type = \"Брови/Ресницы\" ORDER BY name ASC")
+    LiveData<List<ServiceEntity>> getBrowsLashes();
 
-    @Query("SELECT * FROM ServiceEntity WHERE name = \"Парикмахер\" ORDER BY name ASC")
-    LiveData<List<CardSpecialistEntity>> getHairCut();
+    @Query("SELECT * FROM ServiceEntity WHERE type = \"Косметология\" ORDER BY name ASC")
+    LiveData<List<ServiceEntity>> getFacial();
 
-    @Query("SELECT * FROM ServiceEntity WHERE name = \"Визажист\" ORDER BY name ASC")
-    LiveData<List<CardSpecialistEntity>> getMakeUp();
+    @Query("SELECT * FROM ServiceEntity WHERE type = \"Парикмахер\" ORDER BY name ASC")
+    LiveData<List<ServiceEntity>> getHairCut();
 
-    @Query("SELECT * FROM ServiceEntity WHERE name = \"Мастер ногтевого сервиса\" ORDER BY name ASC")
-    LiveData<List<CardSpecialistEntity>> getManicure();
+    @Query("SELECT * FROM ServiceEntity WHERE type = \"Визаж\" ORDER BY name ASC")
+    LiveData<List<ServiceEntity>> getMakeUp();
 
-    @Query("SELECT * FROM ServiceEntity WHERE name = \"Мастер депиляции\" ORDER BY name ASC")
-    LiveData<List<CardSpecialistEntity>> getWaxing();
+    @Query("SELECT * FROM ServiceEntity WHERE type = \"Маникюр/Педикюр\" ORDER BY name ASC")
+    LiveData<List<ServiceEntity>> getManicure();
+
+    @Query("SELECT * FROM ServiceEntity WHERE type = \"Депиляция\" ORDER BY name ASC")
+    LiveData<List<ServiceEntity>> getWaxing();
 
     @Insert
     void addNewItem(ServiceEntity serviceEntity);

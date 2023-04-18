@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/fragment_home_recycler_view_sales"
         app:layout_constraintTop_toBottomOf="@id/fragment_home_header"
-        android:orientation="horizontal"/>
+        android:orientation="horizontal" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

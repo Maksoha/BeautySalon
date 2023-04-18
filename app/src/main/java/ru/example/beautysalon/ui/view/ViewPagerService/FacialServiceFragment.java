@@ -9,21 +9,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.beautysalontest.databinding.FragmentAllBinding;
+import com.example.beautysalontest.databinding.FragmentFacialBinding;
 
-import java.util.Objects;
+import ru.example.beautysalon.ui.adapters.ServiceAdapter;
+import ru.example.beautysalon.ui.adapters.SpecialistAdapter;
+import ru.example.beautysalon.ui.viewModel.viewPagerService.FacialServiceViewModel;
+import ru.example.beautysalon.ui.viewModel.viewPagerSpecialist.FacialViewModel;
 
-import ru.example.beautysalon.ui.adapters.CardSpecialist_RecyclerViewAdapter;
-import ru.example.beautysalon.ui.viewModel.AllViewModel;
 
+public class FacialServiceFragment extends Fragment {
 
-public class AllFragment extends Fragment {
+    private FragmentFacialBinding binding;
 
-    private FragmentAllBinding binding;
-
-    private AllViewModel allViewModel;
+    private FacialServiceViewModel facialViewModel;
 
 
     @Override
@@ -35,7 +35,7 @@ public class AllFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentAllBinding.inflate(inflater, container, false);
+        binding = FragmentFacialBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         return view;
     }
@@ -44,7 +44,7 @@ public class AllFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        allViewModel = new ViewModelProvider(this).get(AllViewModel.class);
+        facialViewModel = new ViewModelProvider(this).get(FacialServiceViewModel.class);
         setRecyclerView_specialistCard();
     }
 
@@ -55,12 +55,9 @@ public class AllFragment extends Fragment {
     }
 
     private void setRecyclerView_specialistCard() {
-        binding.fragmentAllRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL, false));
-        binding.fragmentAllRecyclerView.setAdapter(new CardSpecialist_RecyclerViewAdapter());
-
-        allViewModel.getItemsSpecialist().observe(getViewLifecycleOwner(), value -> {
-            ((CardSpecialist_RecyclerViewAdapter) Objects.requireNonNull(binding.fragmentAllRecyclerView.getAdapter())).updateData(value);
-        });
-
+        ServiceAdapter serviceAdapter = new ServiceAdapter(new ServiceAdapter.ServiceDiff());
+        binding.fragmentFacialRecyclerView.setAdapter(serviceAdapter);
+        binding.fragmentFacialRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        facialViewModel.getItemsSpecialist().observe(getViewLifecycleOwner(), serviceAdapter::submitList);
     }
 }

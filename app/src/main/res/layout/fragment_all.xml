@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:listitem="@layout/card_specialist"
     android:id="@+id/fragment_all_recycler_view"
     tools:context="ru.example.beautysalon.ui.view.ViewPagerSpecialist.AllFragment"
     android:scrollbars="none">

@@ -15,6 +15,8 @@ public interface TypeServiceDao {
     @Query("SELECT * FROM TypeServiceEntity")
     LiveData<List<TypeServiceEntity>> getAllItems();
 
+    @Query("SELECT * FROM TypeServiceEntity WHERE value <> \"Все\"")
+    LiveData<List<TypeServiceEntity>> getAllItemsWithoutAll();
     @Insert
     void addNewItem(TypeServiceEntity typeServiceEntity);
 }

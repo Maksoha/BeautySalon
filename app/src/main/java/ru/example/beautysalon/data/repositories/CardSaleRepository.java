@@ -8,25 +8,18 @@ import androidx.lifecycle.Transformations;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ru.example.beautysalon.data.data_sources.CardSaleDataSource;
 import ru.example.beautysalon.data.data_sources.room.entities.CardSaleEntity;
 import ru.example.beautysalon.data.data_sources.room.root.AppDataBase;
 import ru.example.beautysalon.data.models.CardSaleModel;
 
 public class CardSaleRepository {
 
-    private CardSaleDataSource dataSource;
     private AppDataBase dataBase;
 
     public CardSaleRepository(Application application) {
-        this.dataSource = new CardSaleDataSource();
         this.dataBase = AppDataBase.getDataBase(application);
 
 
-    }
-
-    public LiveData<List<CardSaleModel>> getData() {
-        return dataSource.items();
     }
 
 

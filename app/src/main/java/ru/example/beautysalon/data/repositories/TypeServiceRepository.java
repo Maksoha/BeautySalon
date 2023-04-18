@@ -20,14 +20,21 @@ public class TypeServiceRepository {
 
     public LiveData<List<TypeServiceModel>> getDatabaseData() {
         return Transformations.map(
-                dataBase.serviceDao().getAllItems(),
+                dataBase.typeServiceDao().getAllItems(),
+                values -> values.stream().map(TypeServiceEntity::toDomainModel).collect(Collectors.toList())
+        );
+    }
+
+    public LiveData<List<TypeServiceModel>> getDatabaseDataWithoutAll() {
+        return Transformations.map(
+                dataBase.typeServiceDao().getAllItemsWithoutAll(),
                 values -> values.stream().map(TypeServiceEntity::toDomainModel).collect(Collectors.toList())
         );
     }
 
     public void addItem(TypeServiceModel newItem) {
         AppDataBase.databaseWriterExecutor.execute(() ->{
-            dataBase.serviceDao().addNewItem(new TypeServiceEntity(newItem.getText()));
+            dataBase.typeServiceDao().addNewItem(new TypeServiceEntity(newItem.getText()));
         });
     }
 }

@@ -20,7 +20,9 @@ public class HomeViewModel extends AndroidViewModel {
 
     private LiveData<List<CardSaleModel>> cardItemsSale;
 
-    private LiveData<List<TypeServiceModel>> itemsService;
+    private LiveData<List<TypeServiceModel>> typeItemsServiceWithoutAll;
+    private LiveData<List<TypeServiceModel>> typeItemsService;
+
 
     public HomeViewModel(@NonNull Application application) {
         super(application);
@@ -29,14 +31,18 @@ public class HomeViewModel extends AndroidViewModel {
         cardItemsSale = cardSaleRepository.getDatabaseData();
 
         typeServiceRepository = new TypeServiceRepository(application);
-        itemsService = typeServiceRepository.getDatabaseData();
+        typeItemsServiceWithoutAll = typeServiceRepository.getDatabaseDataWithoutAll();
+        typeItemsService = typeServiceRepository.getDatabaseData();
+
     }
 
     public LiveData<List<CardSaleModel>> getItemsSale() {
         return cardItemsSale;
     }
 
-    public LiveData<List<TypeServiceModel>> getItemsService() {return  itemsService;}
+    public LiveData<List<TypeServiceModel>> getTypeItemsServiceWithoutAll() {return typeItemsServiceWithoutAll;}
+    public LiveData<List<TypeServiceModel>> getTypeItemsService() {return typeItemsService;}
+
 
 
 }

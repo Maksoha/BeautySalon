@@ -15,6 +15,8 @@ public interface CardSaleDao {
     @Query("SELECT * FROM CardSaleEntity")
     LiveData<List<CardSaleEntity>> getAllItems();
 
+
+
     @Insert
     void addNewItem(CardSaleEntity newItem);
 

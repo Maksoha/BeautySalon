@@ -8,14 +8,12 @@ import androidx.lifecycle.Transformations;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ru.example.beautysalon.data.data_sources.CardSpecialistDataSource;
 import ru.example.beautysalon.data.data_sources.room.entities.CardSpecialistEntity;
 import ru.example.beautysalon.data.data_sources.room.root.AppDataBase;
 import ru.example.beautysalon.data.models.CardSpecialistModel;
 
 public class CardSpecialistRepository {
 
-    private CardSpecialistDataSource dataSource;
     private AppDataBase dataBase;
 
     public CardSpecialistRepository(Application application) {

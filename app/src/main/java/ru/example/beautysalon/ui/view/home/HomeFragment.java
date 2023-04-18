@@ -17,8 +17,8 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.Objects;
 
-import ru.example.beautysalon.ui.adapters.CardSale_RecyclerViewAdapter;
-import ru.example.beautysalon.ui.adapters.Service_RecyclerViewAdapter;
+import ru.example.beautysalon.ui.adapters.SaleAdapter;
+import ru.example.beautysalon.ui.adapters.TypeServiceAdapter;
 import ru.example.beautysalon.ui.adapters.SpecialistViewPagerAdapter;
 import ru.example.beautysalon.ui.viewModel.HomeViewModel;
 
@@ -51,7 +51,7 @@ public class HomeFragment extends Fragment {
     private void setTabLayout_specialists() {
         viewPagerAdapter = new SpecialistViewPagerAdapter(requireActivity().getSupportFragmentManager(), requireActivity().getLifecycle());
         binding.fragmentHomeViewPager.setAdapter(viewPagerAdapter);
-        homeViewModel.getItemsService().observe(getViewLifecycleOwner(), cardServiceModels -> {
+        homeViewModel.getTypeItemsService().observe(getViewLifecycleOwner(), cardServiceModels -> {
             if (!cardServiceModels.isEmpty()) {
                 new TabLayoutMediator(binding.fragmentHomeTabLayout, binding.fragmentHomeViewPager,
                         (tab, position) -> {
@@ -72,25 +72,20 @@ public class HomeFragment extends Fragment {
     }
 
     private void setRecyclerView_sale() {
+        SaleAdapter saleAdapter = new SaleAdapter(new SaleAdapter.SaleDiff());
+        binding.fragmentHomeRecyclerViewSales.setAdapter(saleAdapter);
         binding.fragmentHomeRecyclerViewSales.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        binding.fragmentHomeRecyclerViewSales.setAdapter(new CardSale_RecyclerViewAdapter());
 
-        homeViewModel.getItemsSale().observe(getViewLifecycleOwner(), value -> {
-                    if (!value.isEmpty()) {
-                        ((CardSale_RecyclerViewAdapter) Objects.requireNonNull(binding.fragmentHomeRecyclerViewSales.getAdapter())).updateData(value);
-                    }
-                });
+        homeViewModel.getItemsSale().observe(getViewLifecycleOwner(), saleAdapter::submitList);
     }
 
     private void setRecyclerView_service() {
+        TypeServiceAdapter typeServiceAdapter = new TypeServiceAdapter(new TypeServiceAdapter.TypeServiceDiff());
+        binding.fragmentHomeRecyclerViewServices.setAdapter(typeServiceAdapter);
         binding.fragmentHomeRecyclerViewServices.setLayoutManager(new GridLayoutManager(getContext(), 3, GridLayoutManager.VERTICAL, false));
-        binding.fragmentHomeRecyclerViewServices.setAdapter(new Service_RecyclerViewAdapter());
 
-        homeViewModel.getItemsService().observe(getViewLifecycleOwner(), value -> {
-            if (!value.isEmpty()) {
-                ((Service_RecyclerViewAdapter) Objects.requireNonNull(binding.fragmentHomeRecyclerViewServices.getAdapter())).updateData(value);
-            }
-        });
+        homeViewModel.getTypeItemsServiceWithoutAll().observe(getViewLifecycleOwner(), typeServiceAdapter::submitList);
+
     }
 
 

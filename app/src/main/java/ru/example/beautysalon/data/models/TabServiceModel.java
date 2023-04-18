@@ -4,13 +4,13 @@ import androidx.fragment.app.Fragment;
 
 import java.util.ArrayList;
 
-import ru.example.beautysalon.ui.view.ViewPagerService.AllFragment;
-import ru.example.beautysalon.ui.view.ViewPagerService.BrowsLashesFragment;
-import ru.example.beautysalon.ui.view.ViewPagerService.FacialFragment;
-import ru.example.beautysalon.ui.view.ViewPagerService.HaircutFragment;
-import ru.example.beautysalon.ui.view.ViewPagerService.MakeUpFragment;
-import ru.example.beautysalon.ui.view.ViewPagerService.ManicureFragment;
-import ru.example.beautysalon.ui.view.ViewPagerService.WaxingFragment;
+import ru.example.beautysalon.ui.view.ViewPagerService.AllServiceFragment;
+import ru.example.beautysalon.ui.view.ViewPagerService.BrowsLashesServiceFragment;
+import ru.example.beautysalon.ui.view.ViewPagerService.FacialServiceFragment;
+import ru.example.beautysalon.ui.view.ViewPagerService.HaircutServiceFragment;
+import ru.example.beautysalon.ui.view.ViewPagerService.MakeUpServiceFragment;
+import ru.example.beautysalon.ui.view.ViewPagerService.ManicureServiceFragment;
+import ru.example.beautysalon.ui.view.ViewPagerService.WaxingServiceFragment;
 
 public class TabServiceModel {
 
@@ -20,12 +20,12 @@ public class TabServiceModel {
 
     private ArrayList<Fragment> fragmentArrayList = new ArrayList<>();
     public TabServiceModel() {
-        fragmentArrayList.add(new AllFragment());
-        fragmentArrayList.add(new BrowsLashesFragment());
-        fragmentArrayList.add(new FacialFragment());
-        fragmentArrayList.add(new HaircutFragment());
-        fragmentArrayList.add(new MakeUpFragment());
-        fragmentArrayList.add(new ManicureFragment());
-        fragmentArrayList.add(new WaxingFragment());
+        fragmentArrayList.add(new AllServiceFragment());
+        fragmentArrayList.add(new BrowsLashesServiceFragment());
+        fragmentArrayList.add(new FacialServiceFragment());
+        fragmentArrayList.add(new HaircutServiceFragment());
+        fragmentArrayList.add(new MakeUpServiceFragment());
+        fragmentArrayList.add(new ManicureServiceFragment());
+        fragmentArrayList.add(new WaxingServiceFragment());
     }
 }

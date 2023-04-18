@@ -9,20 +9,21 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.beautysalontest.databinding.FragmentManicureBinding;
+import com.example.beautysalontest.databinding.FragmentWaxingBinding;
 
-import java.util.Objects;
+import ru.example.beautysalon.ui.adapters.ServiceAdapter;
+import ru.example.beautysalon.ui.adapters.SpecialistAdapter;
+import ru.example.beautysalon.ui.viewModel.viewPagerService.WaxingServiceViewModel;
+import ru.example.beautysalon.ui.viewModel.viewPagerSpecialist.WaxingViewModel;
 
-import ru.example.beautysalon.ui.adapters.CardSpecialist_RecyclerViewAdapter;
-import ru.example.beautysalon.ui.viewModel.ManicureViewModel;
 
-public class ManicureFragment extends Fragment {
+public class WaxingServiceFragment extends Fragment {
 
-    private FragmentManicureBinding binding;
+    private FragmentWaxingBinding binding;
 
-    private ManicureViewModel manicureViewModel;
+    private WaxingServiceViewModel waxingViewModel;
 
 
     @Override
@@ -34,7 +35,7 @@ public class ManicureFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        binding = FragmentManicureBinding.inflate(inflater, container, false);
+        binding = FragmentWaxingBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
         return view;
     }
@@ -43,7 +44,7 @@ public class ManicureFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        manicureViewModel = new ViewModelProvider(this).get(ManicureViewModel.class);
+        waxingViewModel = new ViewModelProvider(this).get(WaxingServiceViewModel.class);
         setRecyclerView_specialistCard();
     }
 
@@ -54,12 +55,10 @@ public class ManicureFragment extends Fragment {
     }
 
     private void setRecyclerView_specialistCard() {
-        binding.fragmentManicureRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), 1, GridLayoutManager.VERTICAL, false));
-        binding.fragmentManicureRecyclerView.setAdapter(new CardSpecialist_RecyclerViewAdapter());
-
-        manicureViewModel.getItemsSpecialist().observe(getViewLifecycleOwner(), value -> {
-            ((CardSpecialist_RecyclerViewAdapter) Objects.requireNonNull(binding.fragmentManicureRecyclerView.getAdapter())).updateData(value);
-        });
+        ServiceAdapter serviceAdapter = new ServiceAdapter(new ServiceAdapter.ServiceDiff());
+        binding.fragmentWaxingRecyclerView.setAdapter(serviceAdapter);
+        binding.fragmentWaxingRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        waxingViewModel.getItemsSpecialist().observe(getViewLifecycleOwner(), serviceAdapter::submitList);
 
     }
 }
