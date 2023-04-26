@@ -10,11 +10,12 @@ ext {
     constraintLayoutVersion = '2.1.4'
     coreTestingVersion = '2.2.0'
     lifecycleVersion = '2.6.1'
-    materialVersion = '1.5.0'
+    materialVersion = '1.8.0'
     roomVersion = '2.5.1'
     nav_version = "2.5.3"
     arch_version = "2.2.0"
-    fragment_version = "1.5.6"
+    fragment_version = "1.5.7"
+    core_version = "1.10.0"
     // testing
     junitVersion = '4.13.2'
     espressoVersion = '3.4.0'

@@ -13,21 +13,23 @@ import java.util.concurrent.Executors;
 
 import ru.example.beautysalon.data.data_sources.room.dao.CardSaleDao;
 import ru.example.beautysalon.data.data_sources.room.dao.ServiceDao;
+import ru.example.beautysalon.data.data_sources.room.dao.SpecialistDao;
+import ru.example.beautysalon.data.data_sources.room.dao.TimeDao;
 import ru.example.beautysalon.data.data_sources.room.dao.TypeServiceDao;
-import ru.example.beautysalon.data.data_sources.room.dao.CardSpecialistDao;
 import ru.example.beautysalon.data.data_sources.room.entities.CardSaleEntity;
 import ru.example.beautysalon.data.data_sources.room.entities.ServiceEntity;
+import ru.example.beautysalon.data.data_sources.room.entities.SpecialistEntity;
+import ru.example.beautysalon.data.data_sources.room.entities.TimeEntity;
 import ru.example.beautysalon.data.data_sources.room.entities.TypeServiceEntity;
-import ru.example.beautysalon.data.data_sources.room.entities.CardSpecialistEntity;
 
-@Database(entities = {CardSaleEntity.class, TypeServiceEntity.class, CardSpecialistEntity.class, ServiceEntity.class}, version = 1, exportSchema = false)
+@Database(entities = {CardSaleEntity.class, TypeServiceEntity.class, SpecialistEntity.class, ServiceEntity.class, TimeEntity.class}, version = 1, exportSchema = false)
 public abstract class AppDataBase extends RoomDatabase {
 
     public abstract CardSaleDao cardSaleDao();
     public abstract TypeServiceDao typeServiceDao();
-
     public abstract ServiceDao serviceDao();
-    public abstract CardSpecialistDao cardSpecialistDao();
+    public abstract SpecialistDao cardSpecialistDao();
+    public abstract TimeDao timeDao();
     private static final int NUMBER_OF_THREADS = 4;
 
     public static final ExecutorService databaseWriterExecutor =
@@ -73,41 +75,41 @@ public abstract class AppDataBase extends RoomDatabase {
             });
 
             Executors.newSingleThreadExecutor().execute(() -> {
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Анастасия", "Лашмейкер"));
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Анна", "Лашмейкер"));
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Виктория", "Лашмейкер"));
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Елена", "Лашмейкер"));
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Юлия", "Лашмейкер"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Анастасия", "Лашмейкер"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Анна", "Лашмейкер"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Виктория", "Лашмейкер"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Елена", "Лашмейкер"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Юлия", "Лашмейкер"));
 
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Анастасия", "Косметолог"));
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Анна", "Косметолог"));
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Виктория", "Косметолог"));
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Елена", "Косметолог"));
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Юлия", "Косметолог"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Анастасия", "Косметолог"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Анна", "Косметолог"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Виктория", "Косметолог"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Елена", "Косметолог"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Юлия", "Косметолог"));
 
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Анастасия", "Парикмахер"));
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Анна", "Парикмахер"));
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Виктория", "Парикмахер"));
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Елена", "Парикмахер"));
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Юлия", "Парикмахер"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Анастасия", "Парикмахер"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Анна", "Парикмахер"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Виктория", "Парикмахер"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Елена", "Парикмахер"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Юлия", "Парикмахер"));
 
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Анастасия", "Визажист"));
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Анна", "Визажист"));
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Виктория", "Визажист"));
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Елена", "Визажист"));
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Юлия", "Визажист"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Анастасия", "Визажист"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Анна", "Визажист"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Виктория", "Визажист"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Елена", "Визажист"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Юлия", "Визажист"));
 
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Анастасия", "Мастер ногтевого сервиса"));
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Анна", "Мастер ногтевого сервиса"));
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Виктория", "Мастер ногтевого сервиса"));
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Елена", "Мастер ногтевого сервиса"));
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Юлия", "Мастер ногтевого сервиса"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Анастасия", "Мастер ногтевого сервиса"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Анна", "Мастер ногтевого сервиса"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Виктория", "Мастер ногтевого сервиса"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Елена", "Мастер ногтевого сервиса"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Юлия", "Мастер ногтевого сервиса"));
 
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Анастасия", "Мастер депиляции"));
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Анна", "Мастер депиляции"));
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Виктория", "Мастер депиляции"));
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Елена", "Мастер депиляции"));
-                INSTANCE.cardSpecialistDao().addNewItem(new CardSpecialistEntity("Юлия", "Мастер депиляции"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Анастасия", "Мастер депиляции"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Анна", "Мастер депиляции"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Виктория", "Мастер депиляции"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Елена", "Мастер депиляции"));
+                INSTANCE.cardSpecialistDao().addNewItem(new SpecialistEntity("Юлия", "Мастер депиляции"));
 
             });
 
@@ -151,6 +153,12 @@ public abstract class AppDataBase extends RoomDatabase {
                 INSTANCE.serviceDao().addNewItem(new ServiceEntity("Депиляция", "Бикини трусики", 400));
                 INSTANCE.serviceDao().addNewItem(new ServiceEntity("Депиляция", "Бикини глубокое", 800));
                 INSTANCE.serviceDao().addNewItem(new ServiceEntity("Депиляция", "Ноги до колен", 5000));
+            });
+
+            Executors.newSingleThreadExecutor().execute(() -> {
+                for (int i = 0; i < 16; i++) {
+                    INSTANCE.timeDao().addNewItem(new TimeEntity("10:00"));
+                }
             });
         }
     };

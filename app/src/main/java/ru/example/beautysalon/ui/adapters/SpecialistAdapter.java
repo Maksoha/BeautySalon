@@ -1,25 +1,17 @@
 package ru.example.beautysalon.ui.adapters;
 
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.beautysalontest.databinding.CardSpecialistBinding;
+import ru.example.beautysalon.data.models.SpecialistModel;
 
-import ru.example.beautysalon.data.models.CardSpecialistModel;
-import ru.example.beautysalon.data.models.TypeServiceModel;
+public class SpecialistAdapter extends ListAdapter<SpecialistModel, SpecialistViewHolder> {
+    private ServiceAdapter.OnItemClickListener listener;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class SpecialistAdapter extends ListAdapter<CardSpecialistModel, SpecialistViewHolder> {
-
-    public SpecialistAdapter(@NonNull DiffUtil.ItemCallback<CardSpecialistModel> diffCallback) {
+    public SpecialistAdapter(@NonNull DiffUtil.ItemCallback<SpecialistModel> diffCallback) {
         super(diffCallback);
     }
 
@@ -31,19 +23,27 @@ public class SpecialistAdapter extends ListAdapter<CardSpecialistModel, Speciali
 
     @Override
     public void onBindViewHolder(@NonNull SpecialistViewHolder holder, int position) {
-        CardSpecialistModel current = getItem(position);
+        SpecialistModel current = getItem(position);
         holder.bind(current.getName().substring(0, 1), current.getName(), current.getSpeciality());
+        holder.itemView.setOnClickListener(view -> {
+            listener.onItemClick(view, position);
+        });
     }
 
-    public static class SpecialistDiff extends DiffUtil.ItemCallback<CardSpecialistModel> {
+    public void setOnItemClickListener(ServiceAdapter.OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+
+    public static class SpecialistDiff extends DiffUtil.ItemCallback<SpecialistModel> {
 
         @Override
-        public boolean areItemsTheSame(@NonNull CardSpecialistModel oldItem, @NonNull CardSpecialistModel newItem) {
+        public boolean areItemsTheSame(@NonNull SpecialistModel oldItem, @NonNull SpecialistModel newItem) {
             return oldItem == newItem;
         }
 
         @Override
-        public boolean areContentsTheSame(@NonNull CardSpecialistModel oldItem, @NonNull CardSpecialistModel newItem) {
+        public boolean areContentsTheSame(@NonNull SpecialistModel oldItem, @NonNull SpecialistModel newItem) {
             return (oldItem.getName().equals(newItem.getName())
             && oldItem.getSpeciality().equals(newItem.getSpeciality()));
         }

@@ -9,9 +9,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 
+import com.example.beautysalontest.R;
 import com.example.beautysalontest.databinding.FragmentAllBinding;
 
 import ru.example.beautysalon.ui.adapters.SpecialistAdapter;
@@ -55,6 +57,8 @@ public class AllFragment extends Fragment {
 
     private void setRecyclerView_specialistCard() {
         SpecialistAdapter specialistAdapter = new SpecialistAdapter(new SpecialistAdapter.SpecialistDiff());
+        specialistAdapter.setOnItemClickListener(((view, position) -> {
+        }));
         binding.fragmentAllRecyclerView.setAdapter(specialistAdapter);
         binding.fragmentAllRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         allViewModel.getItemsSpecialist().observe(getViewLifecycleOwner(), specialistAdapter::submitList);

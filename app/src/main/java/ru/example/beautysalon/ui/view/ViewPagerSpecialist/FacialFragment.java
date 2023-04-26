@@ -55,6 +55,8 @@ public class FacialFragment extends Fragment {
 
     private void setRecyclerView_specialistCard() {
         SpecialistAdapter specialistAdapter = new SpecialistAdapter(new SpecialistAdapter.SpecialistDiff());
+        specialistAdapter.setOnItemClickListener(((view, position) -> {
+        }));
         binding.fragmentFacialRecyclerView.setAdapter(specialistAdapter);
         binding.fragmentFacialRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         facialViewModel.getItemsSpecialist().observe(getViewLifecycleOwner(), specialistAdapter::submitList);

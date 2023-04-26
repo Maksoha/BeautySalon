@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <androidx.cardview.widget.CardView
+        android:layout_width="72dp"
+        android:layout_height="44dp"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="15dp"
+        style="@style/Widget.MaterialComponents.CardView.ItemDate">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/item_time"
+            android:text="Время"
+            android:textColor="@color/onBackground"
+            android:layout_gravity="center"
+            android:padding="10dp"/>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

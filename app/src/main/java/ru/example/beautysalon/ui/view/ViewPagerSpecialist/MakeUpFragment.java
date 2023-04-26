@@ -54,6 +54,8 @@ public class MakeUpFragment extends Fragment {
 
     private void setRecyclerView_specialistCard() {
         SpecialistAdapter specialistAdapter = new SpecialistAdapter(new SpecialistAdapter.SpecialistDiff());
+        specialistAdapter.setOnItemClickListener(((view, position) -> {
+        }));
         binding.fragmentMakeUpRecyclerView.setAdapter(specialistAdapter);
         binding.fragmentMakeUpRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         makeUpViewModel.getItemsSpecialist().observe(getViewLifecycleOwner(), specialistAdapter::submitList);

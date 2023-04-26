@@ -21,7 +21,7 @@ public class HaircutServiceViewModel extends AndroidViewModel {
         itemsService = servicesRepository.getDatabaseDataHaircut();
     }
 
-    public LiveData<List<ServiceModel>> getItemsSpecialist() {
+    public LiveData<List<ServiceModel>> getItemsService() {
         return itemsService;
     }
 }

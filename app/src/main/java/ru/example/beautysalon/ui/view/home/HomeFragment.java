@@ -15,11 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.beautysalontest.databinding.FragmentHomeBinding;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-import java.util.Objects;
-
 import ru.example.beautysalon.ui.adapters.SaleAdapter;
-import ru.example.beautysalon.ui.adapters.TypeServiceAdapter;
 import ru.example.beautysalon.ui.adapters.SpecialistViewPagerAdapter;
+import ru.example.beautysalon.ui.adapters.TypeServiceAdapter;
 import ru.example.beautysalon.ui.viewModel.HomeViewModel;
 
 public class HomeFragment extends Fragment {
@@ -82,6 +80,7 @@ public class HomeFragment extends Fragment {
     private void setRecyclerView_service() {
         TypeServiceAdapter typeServiceAdapter = new TypeServiceAdapter(new TypeServiceAdapter.TypeServiceDiff());
         binding.fragmentHomeRecyclerViewServices.setAdapter(typeServiceAdapter);
+
         binding.fragmentHomeRecyclerViewServices.setLayoutManager(new GridLayoutManager(getContext(), 3, GridLayoutManager.VERTICAL, false));
 
         homeViewModel.getTypeItemsServiceWithoutAll().observe(getViewLifecycleOwner(), typeServiceAdapter::submitList);

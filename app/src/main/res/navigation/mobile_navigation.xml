@@ -21,7 +21,11 @@
         android:id="@+id/navigation_booking"
         android:name="ru.example.beautysalon.ui.view.booking.BookingFragment"
         android:label="@string/title_booking"
-        tools:layout="@layout/fragment_booking" />
+        tools:layout="@layout/fragment_booking" >
+        <action
+            android:id="@+id/action_navigation_booking_to_bookingFragment_SelectSpecialist"
+            app:destination="@id/bookingFragment_SelectSpecialist" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_map"
@@ -34,5 +38,32 @@
         android:name="ru.example.beautysalon.ui.view.profile.StartProfileFragment"
         android:label="@string/title_profile"
         tools:layout="@layout/fragment_start_profile"/>
+    <fragment
+        android:id="@+id/bookingFragment_SelectSpecialist"
+        android:name="ru.example.beautysalon.ui.view.booking.BookingFragment_SelectSpecialist"
+        android:label="Выбор услуги"
+        tools:layout="@layout/fragment_booking_select_specialist" >
+        <action
+            android:id="@+id/action_bookingFragment_SelectSpecialist_to_bookingFragment_SelectDate"
+            app:destination="@id/bookingFragment_SelectDate" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookingFragment_SelectDate"
+        android:name="ru.example.beautysalon.ui.view.booking.BookingFragment_SelectDate"
+        android:label="Выбор даты"
+        tools:layout="@layout/fragment_booking_select_date" >
+        <action
+            android:id="@+id/action_bookingFragment_SelectDate_to_bookingFragment_confirmBooking"
+            app:destination="@id/bookingFragment_confirmBooking" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookingFragment_confirmBooking"
+        android:name="ru.example.beautysalon.ui.view.booking.BookingFragment_confirmBooking"
+        android:label="Подтверждение записи"
+        tools:layout="@layout/fragment_booking_confirm_booking" >
+        <action
+            android:id="@+id/action_bookingFragment_confirmBooking_to_navigation_home"
+            app:destination="@id/navigation_home" />
+    </fragment>
 
 </navigation>

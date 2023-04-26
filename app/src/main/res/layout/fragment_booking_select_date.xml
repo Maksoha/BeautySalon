@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,17 +7,23 @@
     tools:context="ru.example.beautysalon.ui.view.booking.BookingFragment_SelectDate">
 
     <!-- TODO: Update blank fragment layout -->
-    <DatePicker
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/fragment_booking_select_date_datePicker"
-        android:datePickerMode="spinner"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:layout_height="match_parent">
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:id="@+id/fragment_booking_select_date_button"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Выбрать дату"
+            style="@style/Widget.Material3.Button"/>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:padding="10dp"
+        android:layout_margin="16dp"
         android:id="@+id/fragment_booking_select_date_recyclerView_time"
-        app:layout_constraintTop_toBottomOf="@id/fragment_booking_select_date_datePicker">
+        app:layout_constraintTop_toBottomOf="@id/fragment_booking_select_date_button">
     </androidx.recyclerview.widget.RecyclerView>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

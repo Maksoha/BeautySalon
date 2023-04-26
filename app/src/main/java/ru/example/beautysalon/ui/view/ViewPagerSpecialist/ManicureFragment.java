@@ -54,6 +54,8 @@ public class ManicureFragment extends Fragment {
 
     private void setRecyclerView_specialistCard() {
         SpecialistAdapter specialistAdapter = new SpecialistAdapter(new SpecialistAdapter.SpecialistDiff());
+        specialistAdapter.setOnItemClickListener(((view, position) -> {
+        }));
         binding.fragmentManicureRecyclerView.setAdapter(specialistAdapter);
         binding.fragmentManicureRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         manicureViewModel.getItemsSpecialist().observe(getViewLifecycleOwner(), specialistAdapter::submitList);

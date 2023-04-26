@@ -1,5 +1,6 @@
 package ru.example.beautysalon.ui.adapters;
 
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -7,9 +8,10 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
 import ru.example.beautysalon.data.models.ServiceModel;
-import ru.example.beautysalon.data.models.TypeServiceModel;
 
-public class ServiceAdapter extends ListAdapter<ServiceModel, ServiceViewHolder> {
+
+public class ServiceAdapter extends ListAdapter<ServiceModel, ServiceViewHolder>  {
+    private OnItemClickListener listener;
 
     public ServiceAdapter(@NonNull DiffUtil.ItemCallback<ServiceModel> diffCallback) {
         super(diffCallback);
@@ -25,7 +27,20 @@ public class ServiceAdapter extends ListAdapter<ServiceModel, ServiceViewHolder>
     public void onBindViewHolder(@NonNull ServiceViewHolder holder, int position) {
         ServiceModel current = getItem(position);
         holder.bind(current.getName(), current.getPrice());
+        holder.itemView.setOnClickListener(view -> {
+            listener.onItemClick(view, position);
+        });
     }
+
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(View view, int position);
+    }
+
 
     public static class ServiceDiff extends DiffUtil.ItemCallback<ServiceModel> {
 

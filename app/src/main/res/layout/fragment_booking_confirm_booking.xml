@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -51,7 +51,7 @@
                 app:layout_constraintBottom_toTopOf="@id/fragment_booking_confirmBooking_CardViewService_divider1"
                 android:id="@+id/fragment_booking_confirmBooking_image_CardView_address"
                 android:text="Адрес"
-                android:paddingTop="10dp"
+                android:paddingTop="15dp"
                 style="@style/TextAppearance.Material3.BodyMedium"/>
             <com.google.android.material.divider.MaterialDivider
                 android:layout_width="match_parent"
@@ -143,7 +143,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Время, длительность услуги"
-                android:paddingTop="5dp"
+                android:paddingTop="10dp"
                 style="@style/TextAppearance.Material3.BodyMedium"
                 android:id="@+id/fragment_booking_confirmBooking_CardViewService_time"
                 app:layout_constraintTop_toBottomOf="@id/fragment_booking_confirmBooking_CardViewService_date"
@@ -166,7 +166,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="8dp"
+                android:paddingTop="10dp"
                 android:id="@+id/fragment_booking_confirmBooking_CardViewService_comment"
                 app:layout_constraintTop_toBottomOf="@id/fragment_booking_confirmBooking_CardViewService_comment_header"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -202,8 +202,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="24dp"
             android:id="@+id/fragment_booking_confirmBooking_buttonConfirm"
-            style="@style/ThemeOverlay.Material3.Button.TextButton"
+            style="@style/Widget.Material3.Button"
             app:layout_constraintTop_toBottomOf="@id/fragment_booking_confirmBooking_textField_phone"
             android:text="Подтвердить запись"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

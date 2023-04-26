@@ -21,7 +21,7 @@ public class MakeUpServiceViewModel extends AndroidViewModel {
         itemsService = servicesRepository.getDatabaseDataMakeUp();
     }
 
-    public LiveData<List<ServiceModel>> getItemsSpecialist() {
+    public LiveData<List<ServiceModel>> getItemsService() {
         return itemsService;
     }
 }

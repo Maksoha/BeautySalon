@@ -74,7 +74,7 @@
 <!--        <item name="windowNoTitle">true</item>-->
 <!--    </style>-->
 
-<!--    <style name="Theme.BeautySalonTest.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />-->
+<!--    <style name="Theme.BeautySalonTest.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.ActionBar" />-->
 
 <!--    <style name="Theme.BeautySalonTest.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />-->
 </resources>

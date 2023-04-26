@@ -56,6 +56,8 @@ public class HaircutFragment extends Fragment {
 
     private void setRecyclerView_specialistCard() {
         SpecialistAdapter specialistAdapter = new SpecialistAdapter(new SpecialistAdapter.SpecialistDiff());
+        specialistAdapter.setOnItemClickListener(((view, position) -> {
+        }));
         binding.fragmentHaircutRecyclerView.setAdapter(specialistAdapter);
         binding.fragmentHaircutRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         haircutViewModel.getItemsSpecialist().observe(getViewLifecycleOwner(), specialistAdapter::submitList);

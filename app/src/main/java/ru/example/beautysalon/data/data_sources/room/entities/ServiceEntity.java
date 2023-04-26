@@ -17,6 +17,7 @@ public class ServiceEntity {
     @ColumnInfo
     public int price;
 
+
     public ServiceEntity() {
     }
 

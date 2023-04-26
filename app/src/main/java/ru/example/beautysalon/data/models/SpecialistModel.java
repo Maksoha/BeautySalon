@@ -1,10 +1,10 @@
 package ru.example.beautysalon.data.models;
 
-public class CardSpecialistModel {
+public class SpecialistModel {
     private String name;
     private String speciality;
 
-    public CardSpecialistModel(String name, String speciality) {
+    public SpecialistModel(String name, String speciality) {
         this.name = name;
         this.speciality = speciality;
     }

@@ -22,7 +22,7 @@ public class BrowsLashesServiceViewModel extends AndroidViewModel {
         itemsService = servicesRepository.getDatabaseDataBrowsLashes();
     }
 
-    public LiveData<List<ServiceModel>> getItemsSpecialist() {
+    public LiveData<List<ServiceModel>> getItemsService() {
         return itemsService;
     }
 }

@@ -21,7 +21,7 @@ public class WaxingServiceViewModel extends AndroidViewModel {
         itemsService = servicesRepository.getDatabaseDataWaxing();
     }
 
-    public LiveData<List<ServiceModel>> getItemsSpecialist() {
+    public LiveData<List<ServiceModel>> getItemsService() {
         return itemsService;
     }
 }

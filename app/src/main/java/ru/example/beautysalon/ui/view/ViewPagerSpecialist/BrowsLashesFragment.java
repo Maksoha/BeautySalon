@@ -56,6 +56,8 @@ public class BrowsLashesFragment extends Fragment {
     private void setRecyclerView_specialistCard() {
         SpecialistAdapter specialistAdapter = new SpecialistAdapter(new SpecialistAdapter.SpecialistDiff());
         binding.fragmentBrowsLashesRecyclerView.setAdapter(specialistAdapter);
+        specialistAdapter.setOnItemClickListener(((view, position) -> {
+        }));
         binding.fragmentBrowsLashesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         browsLashesViewModel.getItemsSpecialist().observe(getViewLifecycleOwner(), specialistAdapter::submitList);
 

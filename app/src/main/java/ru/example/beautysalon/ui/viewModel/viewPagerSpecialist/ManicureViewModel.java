@@ -8,21 +8,21 @@ import androidx.lifecycle.LiveData;
 
 import java.util.List;
 
-import ru.example.beautysalon.data.models.CardSpecialistModel;
-import ru.example.beautysalon.data.repositories.CardSpecialistRepository;
+import ru.example.beautysalon.data.models.SpecialistModel;
+import ru.example.beautysalon.data.repositories.SpecialistRepository;
 
 public class ManicureViewModel extends AndroidViewModel {
 
-    private CardSpecialistRepository specialistRepository;
-    private LiveData<List<CardSpecialistModel>> itemsSpecialist;
+    private SpecialistRepository specialistRepository;
+    private LiveData<List<SpecialistModel>> itemsSpecialist;
 
     public ManicureViewModel(@NonNull Application application) {
         super(application);
-        specialistRepository = new CardSpecialistRepository(application);
+        specialistRepository = new SpecialistRepository(application);
         itemsSpecialist = specialistRepository.getDatabaseDataManicure();
     }
 
-    public LiveData<List<CardSpecialistModel>> getItemsSpecialist() {
+    public LiveData<List<SpecialistModel>> getItemsSpecialist() {
         return itemsSpecialist;
     }
 }

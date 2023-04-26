@@ -55,9 +55,10 @@ public class WaxingFragment extends Fragment {
 
     private void setRecyclerView_specialistCard() {
         SpecialistAdapter specialistAdapter = new SpecialistAdapter(new SpecialistAdapter.SpecialistDiff());
+        specialistAdapter.setOnItemClickListener(((view, position) -> {
+        }));
         binding.fragmentWaxingRecyclerView.setAdapter(specialistAdapter);
         binding.fragmentWaxingRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         waxingViewModel.getItemsSpecialist().observe(getViewLifecycleOwner(), specialistAdapter::submitList);
-
     }
 }

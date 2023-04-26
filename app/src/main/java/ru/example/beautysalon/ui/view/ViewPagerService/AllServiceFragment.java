@@ -9,17 +9,20 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import com.example.beautysalontest.R;
 import com.example.beautysalontest.databinding.FragmentAllBinding;
 
+import ru.example.beautysalon.data.models.ServiceModel;
 import ru.example.beautysalon.ui.adapters.ServiceAdapter;
-import ru.example.beautysalon.ui.adapters.SpecialistAdapter;
+import ru.example.beautysalon.ui.viewModel.SharedViewModel;
 import ru.example.beautysalon.ui.viewModel.viewPagerService.AllServiceViewModel;
 
 
 public class AllServiceFragment extends Fragment {
-
+    private SharedViewModel sharedViewModel;
     private FragmentAllBinding binding;
 
     private AllServiceViewModel allServiceViewModel;
@@ -28,6 +31,7 @@ public class AllServiceFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
     }
 
     @Override
@@ -44,7 +48,7 @@ public class AllServiceFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         allServiceViewModel = new ViewModelProvider(this).get(AllServiceViewModel.class);
-        setRecyclerView_specialistCard();
+        setRecyclerView_service();
     }
 
     @Override
@@ -53,10 +57,15 @@ public class AllServiceFragment extends Fragment {
         binding = null;
     }
 
-    private void setRecyclerView_specialistCard() {
+    private void setRecyclerView_service() {
         ServiceAdapter serviceAdapter = new ServiceAdapter(new ServiceAdapter.ServiceDiff());
+        serviceAdapter.setOnItemClickListener((view, position) -> {
+            ServiceModel selectedService = serviceAdapter.getCurrentList().get(position);
+            sharedViewModel.setTypeService(selectedService.getType());
+            Navigation.findNavController(view).navigate(R.id.action_navigation_booking_to_bookingFragment_SelectSpecialist);
+        });
         binding.fragmentAllRecyclerView.setAdapter(serviceAdapter);
         binding.fragmentAllRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        allServiceViewModel.getItemsSpecialist().observe(getViewLifecycleOwner(), serviceAdapter::submitList);
+        allServiceViewModel.getItemsService().observe(getViewLifecycleOwner(), serviceAdapter::submitList);
     }
 }

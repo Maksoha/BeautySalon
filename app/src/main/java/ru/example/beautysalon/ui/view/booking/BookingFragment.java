@@ -1,28 +1,24 @@
 package ru.example.beautysalon.ui.view.booking;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.example.beautysalontest.R;
 import com.example.beautysalontest.databinding.FragmentBookingBinding;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import ru.example.beautysalon.ui.adapters.ServiceViewPagerAdapter;
-import ru.example.beautysalon.ui.adapters.SpecialistViewPagerAdapter;
 import ru.example.beautysalon.ui.viewModel.BookingViewModel;
 
 
 public class BookingFragment extends Fragment {
     private FragmentBookingBinding binding;
-
     private BookingViewModel viewModel;
 
     private ServiceViewPagerAdapter viewPagerAdapter;

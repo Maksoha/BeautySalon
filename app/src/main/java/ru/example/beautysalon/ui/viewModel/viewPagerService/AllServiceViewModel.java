@@ -24,7 +24,7 @@ public class AllServiceViewModel extends AndroidViewModel {
 
     }
 
-    public LiveData<List<ServiceModel>> getItemsSpecialist() {
+    public LiveData<List<ServiceModel>> getItemsService() {
         return itemsService;
     }
 }
