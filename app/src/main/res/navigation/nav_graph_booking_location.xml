@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/nav_graph_booking_location">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_booking_location"
+    app:startDestination="@id/bookingFragmentLocationSalon">
+    <fragment
+        android:id="@+id/bookingFragmentLocationSalon"
+        android:name="ru.example.beautysalon.ui.view.booking.BookingFragmentLocationSalon"
+        android:label="fragment_booking_location_salon"
+        tools:layout="@layout/fragment_booking_location_salon" />
+    <fragment
+        android:id="@+id/bookingFragmentLocationHome"
+        android:name="ru.example.beautysalon.ui.view.booking.BookingFragmentLocationHome"
+        android:label="fragment_booking_location_home"
+        tools:layout="@layout/fragment_booking_location_home" />
 </navigation>

@@ -13,57 +13,57 @@ import ru.example.beautysalon.data.data_sources.room.root.AppDataBase;
 import ru.example.beautysalon.data.models.ServiceModel;
 
 public class ServicesRepository {
-    private AppDataBase dataBase;
+    private AppDataBase appDataBase;
 
     public ServicesRepository(Application application) {
-        dataBase = AppDataBase.getDataBase(application);
+        appDataBase = AppDataBase.getDataBase(application);
     }
 
     public LiveData<List<ServiceModel>> getDatabaseData() {
         return Transformations.map(
-                dataBase.serviceDao().getAllItems(),
+                appDataBase.serviceDao().getAllItems(),
                 values -> values.stream().map(ServiceEntity::toDomainMode).collect(Collectors.toList())
         );
     }
 
     public LiveData<List<ServiceModel>> getDatabaseDataBrowsLashes() {
         return Transformations.map(
-                dataBase.serviceDao().getBrowsLashes(),
+                appDataBase.serviceDao().getBrowsLashes(),
                 values -> values.stream().map(ServiceEntity::toDomainMode).collect(Collectors.toList())
         );
     }
 
     public LiveData<List<ServiceModel>> getDatabaseDataFacial() {
         return Transformations.map(
-                dataBase.serviceDao().getFacial(),
+                appDataBase.serviceDao().getFacial(),
                 values -> values.stream().map(ServiceEntity::toDomainMode).collect(Collectors.toList())
         );
     }
 
     public LiveData<List<ServiceModel>> getDatabaseDataHaircut() {
         return Transformations.map(
-                dataBase.serviceDao().getHairCut(),
+                appDataBase.serviceDao().getHairCut(),
                 values -> values.stream().map(ServiceEntity::toDomainMode).collect(Collectors.toList())
         );
     }
 
     public LiveData<List<ServiceModel>> getDatabaseDataMakeUp() {
         return Transformations.map(
-                dataBase.serviceDao().getMakeUp(),
+                appDataBase.serviceDao().getMakeUp(),
                 values -> values.stream().map(ServiceEntity::toDomainMode).collect(Collectors.toList())
         );
     }
 
     public LiveData<List<ServiceModel>> getDatabaseDataManicure() {
         return Transformations.map(
-                dataBase.serviceDao().getManicure(),
+                appDataBase.serviceDao().getManicure(),
                 values -> values.stream().map(ServiceEntity::toDomainMode).collect(Collectors.toList())
         );
     }
 
     public LiveData<List<ServiceModel>> getDatabaseDataWaxing() {
         return Transformations.map(
-                dataBase.serviceDao().getWaxing(),
+                appDataBase.serviceDao().getWaxing(),
                 values -> values.stream().map(ServiceEntity::toDomainMode).collect(Collectors.toList())
         );
     }

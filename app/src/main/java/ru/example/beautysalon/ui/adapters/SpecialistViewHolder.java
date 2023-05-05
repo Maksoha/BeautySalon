@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.beautysalontest.databinding.CardSpecialistBinding;
+import ru.example.beautysalon.databinding.CardSpecialistBinding;
 
 public class SpecialistViewHolder extends RecyclerView.ViewHolder {
     private CardSpecialistBinding binding;

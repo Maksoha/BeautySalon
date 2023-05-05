@@ -1,6 +1,7 @@
 package ru.example.beautysalon.ui.view.booking;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +13,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.beautysalontest.R;
-import com.example.beautysalontest.databinding.FragmentBookingSelectSpecialistBinding;
 
+import ru.example.beautysalon.R;
+import ru.example.beautysalon.data.models.SpecialistModel;
+import ru.example.beautysalon.databinding.FragmentBookingSelectSpecialistBinding;
 import ru.example.beautysalon.ui.adapters.SpecialistAdapter;
 import ru.example.beautysalon.ui.viewModel.BookingSelectSpecialistViewModel;
 import ru.example.beautysalon.ui.viewModel.SharedViewModel;
@@ -27,6 +29,7 @@ public class BookingFragment_SelectSpecialist extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        viewModel = new ViewModelProvider(this).get(BookingSelectSpecialistViewModel.class);
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
     }
     @Override
@@ -42,14 +45,19 @@ public class BookingFragment_SelectSpecialist extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        viewModel = new ViewModelProvider(this).get(BookingSelectSpecialistViewModel.class);
         setRecyclerViewSpecialist();
+        sharedViewModel.getLocation().observe(getViewLifecycleOwner(), location ->{
+            Log.d("check", location);
+        });
     }
 
     private void setRecyclerViewSpecialist() {
         sharedViewModel.getTypeService().observe(getViewLifecycleOwner(), service -> {
             SpecialistAdapter specialistAdapter = new SpecialistAdapter(new SpecialistAdapter.SpecialistDiff());
             specialistAdapter.setOnItemClickListener(((view, position) -> {
+                SpecialistModel specialistModel = specialistAdapter.getCurrentList().get(position);
+                sharedViewModel.setNameSpecialist(specialistModel.getName());
+                sharedViewModel.setSpecialitySpecialist(specialistModel.getSpeciality());
                 Navigation.findNavController(view).navigate(R.id.action_bookingFragment_SelectSpecialist_to_bookingFragment_SelectDate);
             }));
             binding.fragmentBookingSelectSpecialistRecyclerView.setAdapter(specialistAdapter);
@@ -75,5 +83,6 @@ public class BookingFragment_SelectSpecialist extends Fragment {
                     break;
             }
         });
+
     }
 }

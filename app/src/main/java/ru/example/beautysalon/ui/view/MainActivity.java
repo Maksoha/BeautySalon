@@ -2,16 +2,16 @@ package ru.example.beautysalon.ui.view;
 
 import android.os.Bundle;
 
-import com.example.beautysalontest.R;
-import com.example.beautysalontest.databinding.ActivityMainBinding;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.yandex.mapkit.MapKitFactory;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+
+import com.yandex.mapkit.MapKitFactory;
+
+import ru.example.beautysalon.R;
+import ru.example.beautysalon.databinding.ActivityMainBinding;
 
 
 public class MainActivity extends AppCompatActivity {

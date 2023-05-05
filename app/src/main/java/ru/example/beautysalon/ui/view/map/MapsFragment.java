@@ -9,13 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.beautysalontest.R;
-import com.example.beautysalontest.databinding.FragmentMapsBinding;
 import com.yandex.mapkit.Animation;
 import com.yandex.mapkit.MapKitFactory;
 import com.yandex.mapkit.geometry.Point;
 import com.yandex.mapkit.map.CameraPosition;
 import com.yandex.mapkit.mapview.MapView;
+
+import ru.example.beautysalon.databinding.FragmentMapsBinding;
 
 
 public class MapsFragment extends Fragment {

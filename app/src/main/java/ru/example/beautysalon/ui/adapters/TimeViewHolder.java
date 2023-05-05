@@ -7,8 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.beautysalontest.databinding.CardTypeServiceBinding;
-import com.example.beautysalontest.databinding.ItemTimeBinding;
+import ru.example.beautysalon.databinding.ItemTimeBinding;
 
 public class TimeViewHolder extends RecyclerView.ViewHolder {
 

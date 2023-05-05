@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/navigation_booking"
         android:name="ru.example.beautysalon.ui.view.booking.BookingFragment"
-        android:label="@string/title_booking"
+        android:label="Выбор услуги"
         tools:layout="@layout/fragment_booking" >
         <action
             android:id="@+id/action_navigation_booking_to_bookingFragment_SelectSpecialist"
@@ -41,7 +41,7 @@
     <fragment
         android:id="@+id/bookingFragment_SelectSpecialist"
         android:name="ru.example.beautysalon.ui.view.booking.BookingFragment_SelectSpecialist"
-        android:label="Выбор услуги"
+        android:label="Выбор специалиста"
         tools:layout="@layout/fragment_booking_select_specialist" >
         <action
             android:id="@+id/action_bookingFragment_SelectSpecialist_to_bookingFragment_SelectDate"

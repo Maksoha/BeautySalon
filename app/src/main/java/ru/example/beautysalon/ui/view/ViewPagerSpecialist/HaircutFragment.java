@@ -12,8 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.beautysalontest.databinding.FragmentHaircutBinding;
 
+import ru.example.beautysalon.databinding.FragmentHaircutBinding;
 import ru.example.beautysalon.ui.adapters.SpecialistAdapter;
 import ru.example.beautysalon.ui.viewModel.viewPagerSpecialist.HaircutViewModel;
 

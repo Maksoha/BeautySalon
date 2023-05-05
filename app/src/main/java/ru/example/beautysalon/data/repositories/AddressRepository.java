@@ -8,22 +8,22 @@ import androidx.lifecycle.Transformations;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import ru.example.beautysalon.data.data_sources.room.entities.TimeEntity;
+import ru.example.beautysalon.data.data_sources.room.entities.AddressEntity;
 import ru.example.beautysalon.data.data_sources.room.root.AppDataBase;
-import ru.example.beautysalon.data.models.TimeModel;
+import ru.example.beautysalon.data.models.AddressModel;
 
-public class TimeRepository {
+public class AddressRepository {
 
     private AppDataBase appDataBase;
 
-    public TimeRepository(Application application) {
+    public AddressRepository(Application application) {
         appDataBase = AppDataBase.getDataBase(application);
     }
 
-    public LiveData<List<TimeModel>> getDatabaseData() {
+    public LiveData<List<AddressModel>> getDatabaseData() {
         return Transformations.map(
-                appDataBase.timeDao().getAllItems(),
-                values -> values.stream().map(TimeEntity::toDomainModel).collect(Collectors.toList())
+                appDataBase.addressDao().getAllItems(),
+                values -> values.stream().map(AddressEntity::toDomainModel).collect(Collectors.toList())
         );
     }
 }

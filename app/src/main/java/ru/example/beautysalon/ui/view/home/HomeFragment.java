@@ -12,9 +12,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.beautysalontest.databinding.FragmentHomeBinding;
 import com.google.android.material.tabs.TabLayoutMediator;
 
+import ru.example.beautysalon.databinding.FragmentHomeBinding;
 import ru.example.beautysalon.ui.adapters.SaleAdapter;
 import ru.example.beautysalon.ui.adapters.SpecialistViewPagerAdapter;
 import ru.example.beautysalon.ui.adapters.TypeServiceAdapter;

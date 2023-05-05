@@ -13,28 +13,28 @@ import ru.example.beautysalon.data.data_sources.room.root.AppDataBase;
 import ru.example.beautysalon.data.models.TypeServiceModel;
 
 public class TypeServiceRepository {
-    private AppDataBase dataBase;
+    private AppDataBase appDataBase;
     public TypeServiceRepository(Application application) {
-        dataBase = AppDataBase.getDataBase(application);
+        appDataBase = AppDataBase.getDataBase(application);
     }
 
     public LiveData<List<TypeServiceModel>> getDatabaseData() {
         return Transformations.map(
-                dataBase.typeServiceDao().getAllItems(),
+                appDataBase.typeServiceDao().getAllItems(),
                 values -> values.stream().map(TypeServiceEntity::toDomainModel).collect(Collectors.toList())
         );
     }
 
     public LiveData<List<TypeServiceModel>> getDatabaseDataWithoutAll() {
         return Transformations.map(
-                dataBase.typeServiceDao().getAllItemsWithoutAll(),
+                appDataBase.typeServiceDao().getAllItemsWithoutAll(),
                 values -> values.stream().map(TypeServiceEntity::toDomainModel).collect(Collectors.toList())
         );
     }
 
     public void addItem(TypeServiceModel newItem) {
         AppDataBase.databaseWriterExecutor.execute(() ->{
-            dataBase.typeServiceDao().addNewItem(new TypeServiceEntity(newItem.getText()));
+            appDataBase.typeServiceDao().addNewItem(new TypeServiceEntity(newItem.getText()));
         });
     }
 }

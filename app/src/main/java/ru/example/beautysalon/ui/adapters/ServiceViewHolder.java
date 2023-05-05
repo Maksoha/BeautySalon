@@ -7,7 +7,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.beautysalontest.databinding.CardServiceBookingBinding;
+
+import ru.example.beautysalon.databinding.CardServiceBookingBinding;
 
 public class ServiceViewHolder extends RecyclerView.ViewHolder {
     private CardServiceBookingBinding binding;

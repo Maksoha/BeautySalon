@@ -12,8 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.beautysalontest.databinding.FragmentWaxingBinding;
 
+import ru.example.beautysalon.databinding.FragmentWaxingBinding;
 import ru.example.beautysalon.ui.adapters.SpecialistAdapter;
 import ru.example.beautysalon.ui.viewModel.viewPagerSpecialist.WaxingViewModel;
 

@@ -14,25 +14,23 @@ import ru.example.beautysalon.data.models.CardSaleModel;
 
 public class CardSaleRepository {
 
-    private AppDataBase dataBase;
+    private AppDataBase appDataBase;
 
     public CardSaleRepository(Application application) {
-        this.dataBase = AppDataBase.getDataBase(application);
-
-
+        this.appDataBase = AppDataBase.getDataBase(application);
     }
 
 
     public LiveData<List<CardSaleModel>> getDatabaseData() {
         return Transformations.map(
-                dataBase.cardSaleDao().getAllItems(),
+                appDataBase.cardSaleDao().getAllItems(),
                 values -> values.stream().map(CardSaleEntity::toDomainModel).collect(Collectors.toList())
         );
     }
 
     public void addNewItem(CardSaleModel newItem) {
         AppDataBase.databaseWriterExecutor.execute(() -> {
-            dataBase.cardSaleDao().addNewItem(new CardSaleEntity(newItem.getText()));
+            appDataBase.cardSaleDao().addNewItem(new CardSaleEntity(newItem.getText()));
         });
     }
 }

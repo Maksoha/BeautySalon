@@ -11,20 +11,22 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import ru.example.beautysalon.data.data_sources.room.dao.AddressDao;
 import ru.example.beautysalon.data.data_sources.room.dao.CardSaleDao;
 import ru.example.beautysalon.data.data_sources.room.dao.ServiceDao;
 import ru.example.beautysalon.data.data_sources.room.dao.SpecialistDao;
 import ru.example.beautysalon.data.data_sources.room.dao.TimeDao;
 import ru.example.beautysalon.data.data_sources.room.dao.TypeServiceDao;
+import ru.example.beautysalon.data.data_sources.room.entities.AddressEntity;
 import ru.example.beautysalon.data.data_sources.room.entities.CardSaleEntity;
 import ru.example.beautysalon.data.data_sources.room.entities.ServiceEntity;
 import ru.example.beautysalon.data.data_sources.room.entities.SpecialistEntity;
 import ru.example.beautysalon.data.data_sources.room.entities.TimeEntity;
 import ru.example.beautysalon.data.data_sources.room.entities.TypeServiceEntity;
 
-@Database(entities = {CardSaleEntity.class, TypeServiceEntity.class, SpecialistEntity.class, ServiceEntity.class, TimeEntity.class}, version = 1, exportSchema = false)
+@Database(entities = {CardSaleEntity.class, TypeServiceEntity.class, SpecialistEntity.class, ServiceEntity.class, TimeEntity.class, AddressEntity.class}, version = 1, exportSchema = false)
 public abstract class AppDataBase extends RoomDatabase {
-
+    public abstract AddressDao addressDao();
     public abstract CardSaleDao cardSaleDao();
     public abstract TypeServiceDao typeServiceDao();
     public abstract ServiceDao serviceDao();
@@ -159,6 +161,13 @@ public abstract class AppDataBase extends RoomDatabase {
                 for (int i = 0; i < 16; i++) {
                     INSTANCE.timeDao().addNewItem(new TimeEntity("10:00"));
                 }
+            });
+
+            Executors.newSingleThreadExecutor().execute(() -> {
+                INSTANCE.addressDao().addNewItem(new AddressEntity("проспект Вернадского, 78с4, Москва"));
+                INSTANCE.addressDao().addNewItem(new AddressEntity("проспект Вернадского, 86, Москва"));
+                INSTANCE.addressDao().addNewItem(new AddressEntity("Малая Пироговская улица, 1с5, Москва"));
+                INSTANCE.addressDao().addNewItem(new AddressEntity("улица Стромынка, 20, Москва"));
             });
         }
     };

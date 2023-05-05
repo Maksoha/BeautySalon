@@ -3,13 +3,11 @@ package ru.example.beautysalon.ui.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-
-import com.example.beautysalontest.databinding.CardTypeServiceBinding;
+import ru.example.beautysalon.databinding.CardTypeServiceBinding;
 
 
 public class TypeServiceViewHolder extends RecyclerView.ViewHolder {

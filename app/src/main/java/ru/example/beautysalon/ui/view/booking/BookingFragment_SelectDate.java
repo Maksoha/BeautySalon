@@ -1,6 +1,9 @@
 package ru.example.beautysalon.ui.view.booking;
 
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -9,29 +12,30 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import com.example.beautysalontest.R;
-import com.example.beautysalontest.databinding.FragmentBookingSelectDateBinding;
 import com.google.android.material.datepicker.CalendarConstraints;
 import com.google.android.material.datepicker.DateValidatorPointForward;
 import com.google.android.material.datepicker.MaterialDatePicker;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import ru.example.beautysalon.R;
+import ru.example.beautysalon.data.models.TimeModel;
+import ru.example.beautysalon.databinding.FragmentBookingSelectDateBinding;
 import ru.example.beautysalon.ui.adapters.TimeAdapter;
 import ru.example.beautysalon.ui.viewModel.BookingSelectDateViewModel;
+import ru.example.beautysalon.ui.viewModel.SharedViewModel;
 
 
 public class BookingFragment_SelectDate extends Fragment {
     private FragmentBookingSelectDateBinding binding;
     private BookingSelectDateViewModel viewModel;
+    private SharedViewModel sharedViewModel;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
         viewModel = new ViewModelProvider(this).get(BookingSelectDateViewModel.class);
 
     }
@@ -58,7 +62,10 @@ public class BookingFragment_SelectDate extends Fragment {
         MaterialDatePicker<Long> picker = builder.build();
 
         picker.addOnPositiveButtonClickListener(selection -> {
-
+            Date date = new Date(selection);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MMMM d");
+            String formattedDate = dateFormat.format(date);
+            binding.fragmentBookingSelectDateTextDate.setText(formattedDate);
         });
 
         picker.show(getChildFragmentManager(), picker.toString());
@@ -67,6 +74,9 @@ public class BookingFragment_SelectDate extends Fragment {
             picker.show(getChildFragmentManager(), picker.toString());
         });
 
+        if (!binding.fragmentBookingSelectDateTextDate.getText().equals("Выберите дату")) {
+            sharedViewModel.setDate(binding.fragmentBookingSelectDateTextDate.getText().toString());
+        }
 
         return view;
     }
@@ -74,7 +84,6 @@ public class BookingFragment_SelectDate extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
         setRecyclerViewTime();
     }
 
@@ -82,13 +91,15 @@ public class BookingFragment_SelectDate extends Fragment {
         viewModel.getItemsTime().observe(getViewLifecycleOwner(), time -> {
             TimeAdapter timeAdapter =  new TimeAdapter(new TimeAdapter.ItemTimeDiff());
             timeAdapter.setOnItemClickListener(((view, position) -> {
+                TimeModel timeModel = timeAdapter.getCurrentList().get(position);
+                sharedViewModel.setTime(timeModel.getTime());
+                sharedViewModel.setDate(binding.fragmentBookingSelectDateTextDate.getText().toString());
                 Navigation.findNavController(view).navigate(R.id.action_bookingFragment_SelectDate_to_bookingFragment_confirmBooking);
             }));
             binding.fragmentBookingSelectDateRecyclerViewTime.setAdapter(timeAdapter);
             binding.fragmentBookingSelectDateRecyclerViewTime.setLayoutManager(new GridLayoutManager(getContext(), 4, GridLayoutManager.VERTICAL, false));
 
             viewModel.getItemsTime().observe(getViewLifecycleOwner(), timeAdapter::submitList);
-
         });
     }
 }

@@ -12,10 +12,10 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.beautysalontest.R;
-import com.example.beautysalontest.databinding.FragmentAllBinding;
 
+import ru.example.beautysalon.R;
 import ru.example.beautysalon.data.models.ServiceModel;
+import ru.example.beautysalon.databinding.FragmentAllBinding;
 import ru.example.beautysalon.ui.adapters.ServiceAdapter;
 import ru.example.beautysalon.ui.viewModel.SharedViewModel;
 import ru.example.beautysalon.ui.viewModel.viewPagerService.AllServiceViewModel;
@@ -62,6 +62,8 @@ public class AllServiceFragment extends Fragment {
         serviceAdapter.setOnItemClickListener((view, position) -> {
             ServiceModel selectedService = serviceAdapter.getCurrentList().get(position);
             sharedViewModel.setTypeService(selectedService.getType());
+            sharedViewModel.setNameService(selectedService.getName());
+            sharedViewModel.setPriceService(selectedService.getPrice());
             Navigation.findNavController(view).navigate(R.id.action_navigation_booking_to_bookingFragment_SelectSpecialist);
         });
         binding.fragmentAllRecyclerView.setAdapter(serviceAdapter);

@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.beautysalontest'
+    namespace 'ru.example.beautysalon'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.beautysalontest"
+        applicationId "ru.example.beautysalon"
         minSdk 28
         targetSdk 33
         versionCode 1

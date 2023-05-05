@@ -14,57 +14,57 @@ import ru.example.beautysalon.data.models.SpecialistModel;
 
 public class SpecialistRepository {
 
-    private AppDataBase dataBase;
+    private AppDataBase appDataBase;
 
     public SpecialistRepository(Application application) {
-        dataBase = AppDataBase.getDataBase(application);
+        appDataBase = AppDataBase.getDataBase(application);
     }
 
     public LiveData<List<SpecialistModel>> getDatabaseData() {
         return Transformations.map(
-                dataBase.cardSpecialistDao().getAllItems(),
+                appDataBase.cardSpecialistDao().getAllItems(),
                 values -> values.stream().map(SpecialistEntity::toDomainModel).collect(Collectors.toList())
         );
     }
 
     public LiveData<List<SpecialistModel>> getDatabaseDataBrowsLashes() {
         return Transformations.map(
-                dataBase.cardSpecialistDao().getBrowsLashes(),
+                appDataBase.cardSpecialistDao().getBrowsLashes(),
                 values -> values.stream().map(SpecialistEntity::toDomainModel).collect(Collectors.toList())
         );
     }
 
     public LiveData<List<SpecialistModel>> getDatabaseDataFacial() {
         return Transformations.map(
-                dataBase.cardSpecialistDao().getFacial(),
+                appDataBase.cardSpecialistDao().getFacial(),
                 values -> values.stream().map(SpecialistEntity::toDomainModel).collect(Collectors.toList())
         );
     }
 
     public LiveData<List<SpecialistModel>> getDatabaseDataHaircut() {
         return Transformations.map(
-                dataBase.cardSpecialistDao().getHairCut(),
+                appDataBase.cardSpecialistDao().getHairCut(),
                 values -> values.stream().map(SpecialistEntity::toDomainModel).collect(Collectors.toList())
         );
     }
 
     public LiveData<List<SpecialistModel>> getDatabaseDataMakeUp() {
         return Transformations.map(
-                dataBase.cardSpecialistDao().getMakeUp(),
+                appDataBase.cardSpecialistDao().getMakeUp(),
                 values -> values.stream().map(SpecialistEntity::toDomainModel).collect(Collectors.toList())
         );
     }
 
     public LiveData<List<SpecialistModel>> getDatabaseDataManicure() {
         return Transformations.map(
-                dataBase.cardSpecialistDao().getManicure(),
+                appDataBase.cardSpecialistDao().getManicure(),
                 values -> values.stream().map(SpecialistEntity::toDomainModel).collect(Collectors.toList())
         );
     }
 
     public LiveData<List<SpecialistModel>> getDatabaseDataWaxing() {
         return Transformations.map(
-                dataBase.cardSpecialistDao().getWaxing(),
+                appDataBase.cardSpecialistDao().getWaxing(),
                 values -> values.stream().map(SpecialistEntity::toDomainModel).collect(Collectors.toList())
         );
     }

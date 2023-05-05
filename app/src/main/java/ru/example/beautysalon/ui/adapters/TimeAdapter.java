@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
 import ru.example.beautysalon.data.models.TimeModel;
-import ru.example.beautysalon.data.models.TypeServiceModel;
 
 public class TimeAdapter extends ListAdapter<TimeModel, TimeViewHolder> {
 

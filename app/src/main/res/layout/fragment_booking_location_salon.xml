@@ -1,13 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context="ru.example.beautysalon.ui.view.booking.BookingFragment_locationSalon">
-    <EditText
+    android:layout_height="wrap_content"
+    tools:context="ru.example.beautysalon.ui.view.booking.BookingFragmentLocationSalon">
+
+    <com.google.android.material.textfield.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/search_address"
-        android:hint="Введите адрес"
-        android:inputType="text"
-        android:maxLines="1"/>
+        android:layout_margin="16dp"
+        android:id="@+id/menu_address"
+        style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+        android:hint="Адрес салона красоты">
+        <AutoCompleteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textField"
+            android:inputType="text"/>
+    </com.google.android.material.textfield.TextInputLayout>
 </FrameLayout>

@@ -9,13 +9,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-
-import com.example.beautysalontest.R;
-import com.example.beautysalontest.databinding.FragmentAllBinding;
-
+import ru.example.beautysalon.databinding.FragmentAllBinding;
 import ru.example.beautysalon.ui.adapters.SpecialistAdapter;
 import ru.example.beautysalon.ui.viewModel.viewPagerSpecialist.AllViewModel;
 
