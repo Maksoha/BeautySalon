@@ -10,8 +10,8 @@
     <string name="profile">Профиль</string>
     <string name="text_home_fragment_services">Услуги</string>
     <string name="fragment_sales_text_sales">Акции</string>
-    <string name="fragment_home_text_specialists">Специалисты</string>
-    <string name="fragment_booking_text_services">Услуги</string>
+    <string name="text_specialists">Специалисты</string>
+    <string name="text_services">Услуги</string>
     <string name="title_activity_main2">MainActivity2</string>
     <string name="title_home">Главная</string>
     <string name="title_activity_main">MainActivity</string>

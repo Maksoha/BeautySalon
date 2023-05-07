@@ -41,6 +41,6 @@
         android:layout_margin="16dp"
         android:id="@+id/fragment_startProfile_button_signIn"
         app:layout_constraintTop_toBottomOf="@id/fragment_startProfile_textField_phone"
-        style="@style/ThemeOverlay.Material3.Button.TextButton"
+        style="@style/Widget.Material3.Button"
         android:text="Войти"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

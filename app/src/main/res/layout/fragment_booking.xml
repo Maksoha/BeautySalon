@@ -20,13 +20,13 @@
         style="Material3.button"
         app:checkedButton="@id/fragment_booking_button_selected_at_the_salon">
         <Button
-            android:layout_width="128dp"
+            android:layout_width="144dp"
             android:layout_height="64dp"
             style="@style/Widget.Material3.Button.OutlinedButton"
             android:id="@+id/fragment_booking_button_selected_at_the_salon"
             android:text="В салоне" />
         <Button
-            android:layout_width="128dp"
+            android:layout_width="144dp"
             android:layout_height="64dp"
             style="@style/Widget.Material3.Button.OutlinedButton"
             android:id="@+id/fragment_booking_button_selected_at_home"
@@ -45,6 +45,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/fragment_booking_tab_layout"
         app:tabMode="scrollable"
+        style="@style/Widget.Material3.TabLayout"
         app:layout_constraintTop_toBottomOf="@id/fragmentContainerView"/>
 
     <androidx.viewpager2.widget.ViewPager2

@@ -9,7 +9,14 @@
         android:id="@+id/navigation_home"
         android:name="ru.example.beautysalon.ui.view.home.HomeFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_navigation_home_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_serviceFragment"
+            app:destination="@id/serviceFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_sale"
@@ -65,5 +72,15 @@
             android:id="@+id/action_bookingFragment_confirmBooking_to_navigation_home"
             app:destination="@id/navigation_home" />
     </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="ru.example.beautysalon.ui.view.home.NotificationFragment"
+        android:label="Уведомления"
+        tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/serviceFragment"
+        android:name="ru.example.beautysalon.ui.view.home.ServiceFragment"
+        android:label="fragment_service"
+        tools:layout="@layout/fragment_service" />
 
 </navigation>

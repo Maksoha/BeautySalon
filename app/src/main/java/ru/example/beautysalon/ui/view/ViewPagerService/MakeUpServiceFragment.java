@@ -1,7 +1,6 @@
 package ru.example.beautysalon.ui.view.ViewPagerService;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,22 +17,20 @@ import ru.example.beautysalon.R;
 import ru.example.beautysalon.data.models.ServiceModel;
 import ru.example.beautysalon.databinding.FragmentMakeUpBinding;
 import ru.example.beautysalon.ui.adapters.ServiceAdapter;
-import ru.example.beautysalon.ui.adapters.SpecialistAdapter;
-import ru.example.beautysalon.ui.viewModel.SharedViewModel;
+import ru.example.beautysalon.ui.viewModel.BookingConfirmViewModel;
 import ru.example.beautysalon.ui.viewModel.viewPagerService.MakeUpServiceViewModel;
-import ru.example.beautysalon.ui.viewModel.viewPagerSpecialist.MakeUpViewModel;
 
 
 public class MakeUpServiceFragment extends Fragment implements ServiceAdapter.OnItemClickListener{
     private FragmentMakeUpBinding binding;
-    private SharedViewModel sharedViewModel;
+    private BookingConfirmViewModel bookingConfirmViewModel;
     private MakeUpServiceViewModel makeUpViewModel;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+        bookingConfirmViewModel = new ViewModelProvider(requireActivity()).get(BookingConfirmViewModel.class);
     }
 
     @Override
@@ -63,9 +60,9 @@ public class MakeUpServiceFragment extends Fragment implements ServiceAdapter.On
         ServiceAdapter serviceAdapter = new ServiceAdapter(new ServiceAdapter.ServiceDiff());
         serviceAdapter.setOnItemClickListener((view, position) -> {
             ServiceModel selectedService = serviceAdapter.getCurrentList().get(position);
-            sharedViewModel.setTypeService(selectedService.getType());
-            sharedViewModel.setNameService(selectedService.getName());
-            sharedViewModel.setPriceService(selectedService.getPrice());
+            bookingConfirmViewModel.setTypeService(selectedService.getType());
+            bookingConfirmViewModel.setNameService(selectedService.getName());
+            bookingConfirmViewModel.setPriceService(selectedService.getPrice());
             Navigation.findNavController(view).navigate(R.id.action_navigation_booking_to_bookingFragment_SelectSpecialist);
         });
         binding.fragmentMakeUpRecyclerView.setAdapter(serviceAdapter);

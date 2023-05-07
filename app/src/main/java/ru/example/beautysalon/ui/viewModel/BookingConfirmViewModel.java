@@ -7,7 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 
-public class SharedViewModel extends ViewModel {
+public class BookingConfirmViewModel extends ViewModel {
     private MutableLiveData<Boolean> selectAddress = new MutableLiveData<>(false);
     private MutableLiveData<Integer> approach = new MutableLiveData<>();
     private MutableLiveData<Integer> intercom = new MutableLiveData<>();

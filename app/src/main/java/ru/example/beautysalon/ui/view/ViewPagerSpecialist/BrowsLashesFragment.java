@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,8 @@ public class BrowsLashesFragment extends Fragment {
         }));
         binding.fragmentBrowsLashesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         browsLashesViewModel.getItemsSpecialist().observe(getViewLifecycleOwner(), specialistAdapter::submitList);
-
+        browsLashesViewModel.getItemsSpecialist().observe(getViewLifecycleOwner(), specialistModels -> {
+            Log.d("check", String.valueOf(specialistModels.size()));
+        });
     }
 }

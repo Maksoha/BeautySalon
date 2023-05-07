@@ -13,21 +13,24 @@ import java.util.concurrent.Executors;
 
 import ru.example.beautysalon.data.data_sources.room.dao.AddressDao;
 import ru.example.beautysalon.data.data_sources.room.dao.CardSaleDao;
+import ru.example.beautysalon.data.data_sources.room.dao.NotificationDao;
 import ru.example.beautysalon.data.data_sources.room.dao.ServiceDao;
 import ru.example.beautysalon.data.data_sources.room.dao.SpecialistDao;
 import ru.example.beautysalon.data.data_sources.room.dao.TimeDao;
 import ru.example.beautysalon.data.data_sources.room.dao.TypeServiceDao;
 import ru.example.beautysalon.data.data_sources.room.entities.AddressEntity;
 import ru.example.beautysalon.data.data_sources.room.entities.CardSaleEntity;
+import ru.example.beautysalon.data.data_sources.room.entities.NotificationEntity;
 import ru.example.beautysalon.data.data_sources.room.entities.ServiceEntity;
 import ru.example.beautysalon.data.data_sources.room.entities.SpecialistEntity;
 import ru.example.beautysalon.data.data_sources.room.entities.TimeEntity;
 import ru.example.beautysalon.data.data_sources.room.entities.TypeServiceEntity;
 
-@Database(entities = {CardSaleEntity.class, TypeServiceEntity.class, SpecialistEntity.class, ServiceEntity.class, TimeEntity.class, AddressEntity.class}, version = 1, exportSchema = false)
+@Database(entities = {CardSaleEntity.class, TypeServiceEntity.class, SpecialistEntity.class, ServiceEntity.class, TimeEntity.class, AddressEntity.class, NotificationEntity.class}, version = 1, exportSchema = false)
 public abstract class AppDataBase extends RoomDatabase {
     public abstract AddressDao addressDao();
     public abstract CardSaleDao cardSaleDao();
+    public abstract NotificationDao notificationDao();
     public abstract TypeServiceDao typeServiceDao();
     public abstract ServiceDao serviceDao();
     public abstract SpecialistDao cardSpecialistDao();
@@ -158,9 +161,29 @@ public abstract class AppDataBase extends RoomDatabase {
             });
 
             Executors.newSingleThreadExecutor().execute(() -> {
-                for (int i = 0; i < 16; i++) {
-                    INSTANCE.timeDao().addNewItem(new TimeEntity("10:00"));
-                }
+                INSTANCE.timeDao().addNewItem(new TimeEntity("10:00"));
+                INSTANCE.timeDao().addNewItem(new TimeEntity("10:30"));
+                INSTANCE.timeDao().addNewItem(new TimeEntity("11:00"));
+                INSTANCE.timeDao().addNewItem(new TimeEntity("11:30"));
+                INSTANCE.timeDao().addNewItem(new TimeEntity("12:00"));
+                INSTANCE.timeDao().addNewItem(new TimeEntity("12:30"));
+                INSTANCE.timeDao().addNewItem(new TimeEntity("13:00"));
+                INSTANCE.timeDao().addNewItem(new TimeEntity("13:30"));
+                INSTANCE.timeDao().addNewItem(new TimeEntity("14:00"));
+                INSTANCE.timeDao().addNewItem(new TimeEntity("14:30"));
+                INSTANCE.timeDao().addNewItem(new TimeEntity("15:00"));
+                INSTANCE.timeDao().addNewItem(new TimeEntity("15:30"));
+                INSTANCE.timeDao().addNewItem(new TimeEntity("16:00"));
+                INSTANCE.timeDao().addNewItem(new TimeEntity("16:30"));
+                INSTANCE.timeDao().addNewItem(new TimeEntity("17:00"));
+                INSTANCE.timeDao().addNewItem(new TimeEntity("17:30"));
+                INSTANCE.timeDao().addNewItem(new TimeEntity("18:00"));
+                INSTANCE.timeDao().addNewItem(new TimeEntity("18:30"));
+                INSTANCE.timeDao().addNewItem(new TimeEntity("19:00"));
+                INSTANCE.timeDao().addNewItem(new TimeEntity("19:30"));
+                INSTANCE.timeDao().addNewItem(new TimeEntity("20:00"));
+                INSTANCE.timeDao().addNewItem(new TimeEntity("20:30"));
+                INSTANCE.timeDao().addNewItem(new TimeEntity("21:00"));
             });
 
             Executors.newSingleThreadExecutor().execute(() -> {

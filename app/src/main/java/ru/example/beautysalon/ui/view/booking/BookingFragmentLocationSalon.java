@@ -1,7 +1,6 @@
 package ru.example.beautysalon.ui.view.booking;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +11,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 
 import ru.example.beautysalon.R;
 import ru.example.beautysalon.data.models.AddressModel;
 import ru.example.beautysalon.databinding.FragmentBookingLocationSalonBinding;
 import ru.example.beautysalon.ui.viewModel.BookingLocationSalonViewModel;
-import ru.example.beautysalon.ui.viewModel.SharedViewModel;
+import ru.example.beautysalon.ui.viewModel.BookingConfirmViewModel;
 
 
 public class BookingFragmentLocationSalon extends Fragment {
     BookingLocationSalonViewModel viewModel;
-    SharedViewModel sharedViewModel;
+    BookingConfirmViewModel bookingConfirmViewModel;
     FragmentBookingLocationSalonBinding binding;
 
     @Override
@@ -31,7 +29,7 @@ public class BookingFragmentLocationSalon extends Fragment {
         super.onCreate(savedInstanceState);
 
         viewModel = new ViewModelProvider(this).get(BookingLocationSalonViewModel.class);
-        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+        bookingConfirmViewModel = new ViewModelProvider(requireActivity()).get(BookingConfirmViewModel.class);
 
     }
 
@@ -49,7 +47,7 @@ public class BookingFragmentLocationSalon extends Fragment {
         });
         ((AutoCompleteTextView) binding.menuAddress.getEditText()).
                 setOnItemClickListener((parent, view1, position, id) ->
-                        sharedViewModel.setAddress(parent.getItemAtPosition(position).toString()));
+                        bookingConfirmViewModel.setAddress(parent.getItemAtPosition(position).toString()));
         return view;
     }
 

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import ru.example.beautysalon.databinding.FragmentSaleBinding;
 import ru.example.beautysalon.ui.adapters.SaleAdapter;
+import ru.example.beautysalon.ui.adapters.SaleCenteredAdapter;
 import ru.example.beautysalon.ui.viewModel.SaleViewModel;
 
 public class SaleFragment extends Fragment {
@@ -50,9 +51,9 @@ public class SaleFragment extends Fragment {
     }
 
     private void setRecyclerView_cardSale() {
-        SaleAdapter specialistAdapter = new SaleAdapter(new SaleAdapter.SaleDiff());
-        binding.fragmentSaleRecyclerViewSale.setAdapter(specialistAdapter);
+        SaleCenteredAdapter saleAdapter = new SaleCenteredAdapter(new SaleCenteredAdapter.SaleDiff());
+        binding.fragmentSaleRecyclerViewSale.setAdapter(saleAdapter);
         binding.fragmentSaleRecyclerViewSale.setLayoutManager(new LinearLayoutManager(getContext()));
-        saleViewModel.getItemsSale().observe(getViewLifecycleOwner(), specialistAdapter::submitList);
+        saleViewModel.getItemsSale().observe(getViewLifecycleOwner(), saleAdapter::submitList);
     }
 }

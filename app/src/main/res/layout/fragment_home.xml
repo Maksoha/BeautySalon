@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
             android:id="@+id/fragment_home_text_hello"
             android:text="Добрый день"
             android:padding="16dp"
-            style="@style/headline_small"
+            style="@style/TextAppearance.Material3.HeadlineSmall"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"/>
         <ImageView
@@ -45,17 +45,17 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/fragment_home_text_services"
-        android:text="@string/text_home_fragment_services"
+        android:id="@+id/text_services"
+        android:text="@string/text_services"
         android:padding="10dp"
-        style="@style/title_large"
+        style="@style/TextAppearance.Material3.TitleLarge"
         app:layout_constraintTop_toBottomOf="@id/fragment_home_recycler_view_sales"/>
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:id="@+id/fragment_home_recycler_view_services"
-            app:layout_constraintTop_toBottomOf="@id/fragment_home_text_services"/>
+            app:layout_constraintTop_toBottomOf="@id/text_services"/>
 <!--    <com.google.android.material.button.MaterialButton-->
 <!--        android:layout_width="match_parent"-->
 <!--        android:layout_height="wrap_content"-->
@@ -67,19 +67,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/fragment_home_text_specialists"
-        android:text="@string/fragment_home_text_specialists"
+        android:id="@+id/text_specialists"
+        android:text="@string/text_specialists"
         android:padding="10dp"
-        style="@style/title_large"
+        style="@style/TextAppearance.Material3.TitleLarge"
         app:layout_constraintTop_toBottomOf="@id/fragment_home_recycler_view_services"/>
-<!--        <com.google.android.material.appbar.AppBarLayout-->
-<!--            android:id="@+id/fragment_home_appBarLayout"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="?attr/actionBarSize"-->
-<!--            android:background="?attr/colorPrimary"-->
-<!--            android:elevation="4dp"-->
-<!--            app:layout_scrollFlags="scroll|enterAlways"-->
-<!--            app:layout_constraintTop_toBottomOf="@id/fragment_home_text_specialists"/>-->
     <com.google.android.material.tabs.TabLayout
         android:layout_width="match_parent"
         android:id="@+id/fragment_home_tab_layout"
@@ -87,7 +79,8 @@
         app:tabMode="scrollable"
         android:elevation="4dp"
         android:layout_gravity="top"
-        app:layout_constraintTop_toBottomOf="@id/fragment_home_text_specialists"/>
+        style="@style/Widget.Material3.TabLayout"
+        app:layout_constraintTop_toBottomOf="@id/text_specialists"/>
     <androidx.viewpager2.widget.ViewPager2
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
@@ -95,4 +88,4 @@
         android:id="@+id/fragment_home_ViewPager"
         app:layout_constraintTop_toBottomOf="@id/fragment_home_tab_layout" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+</ScrollView>

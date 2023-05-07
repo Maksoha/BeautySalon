@@ -18,6 +18,7 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import ru.example.beautysalon.R;
@@ -25,17 +26,18 @@ import ru.example.beautysalon.data.models.TimeModel;
 import ru.example.beautysalon.databinding.FragmentBookingSelectDateBinding;
 import ru.example.beautysalon.ui.adapters.TimeAdapter;
 import ru.example.beautysalon.ui.viewModel.BookingSelectDateViewModel;
-import ru.example.beautysalon.ui.viewModel.SharedViewModel;
+import ru.example.beautysalon.ui.viewModel.BookingConfirmViewModel;
 
 
 public class BookingFragment_SelectDate extends Fragment {
     private FragmentBookingSelectDateBinding binding;
     private BookingSelectDateViewModel viewModel;
-    private SharedViewModel sharedViewModel;
+    private BookingConfirmViewModel bookingConfirmViewModel;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+
+        bookingConfirmViewModel = new ViewModelProvider(requireActivity()).get(BookingConfirmViewModel.class);
         viewModel = new ViewModelProvider(this).get(BookingSelectDateViewModel.class);
 
     }
@@ -63,7 +65,7 @@ public class BookingFragment_SelectDate extends Fragment {
 
         picker.addOnPositiveButtonClickListener(selection -> {
             Date date = new Date(selection);
-            SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, MMMM d");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, d MMMM", Locale.getDefault());
             String formattedDate = dateFormat.format(date);
             binding.fragmentBookingSelectDateTextDate.setText(formattedDate);
         });
@@ -75,7 +77,7 @@ public class BookingFragment_SelectDate extends Fragment {
         });
 
         if (!binding.fragmentBookingSelectDateTextDate.getText().equals("Выберите дату")) {
-            sharedViewModel.setDate(binding.fragmentBookingSelectDateTextDate.getText().toString());
+            bookingConfirmViewModel.setDate(binding.fragmentBookingSelectDateTextDate.getText().toString());
         }
 
         return view;
@@ -92,8 +94,8 @@ public class BookingFragment_SelectDate extends Fragment {
             TimeAdapter timeAdapter =  new TimeAdapter(new TimeAdapter.ItemTimeDiff());
             timeAdapter.setOnItemClickListener(((view, position) -> {
                 TimeModel timeModel = timeAdapter.getCurrentList().get(position);
-                sharedViewModel.setTime(timeModel.getTime());
-                sharedViewModel.setDate(binding.fragmentBookingSelectDateTextDate.getText().toString());
+                bookingConfirmViewModel.setTime(timeModel.getTime());
+                bookingConfirmViewModel.setDate(binding.fragmentBookingSelectDateTextDate.getText().toString());
                 Navigation.findNavController(view).navigate(R.id.action_bookingFragment_SelectDate_to_bookingFragment_confirmBooking);
             }));
             binding.fragmentBookingSelectDateRecyclerViewTime.setAdapter(timeAdapter);

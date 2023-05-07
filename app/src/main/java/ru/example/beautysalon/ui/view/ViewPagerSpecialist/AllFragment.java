@@ -1,6 +1,7 @@
 package ru.example.beautysalon.ui.view.ViewPagerSpecialist;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,5 +59,6 @@ public class AllFragment extends Fragment {
         binding.fragmentAllRecyclerView.setAdapter(specialistAdapter);
         binding.fragmentAllRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         allViewModel.getItemsSpecialist().observe(getViewLifecycleOwner(), specialistAdapter::submitList);
+
     }
 }

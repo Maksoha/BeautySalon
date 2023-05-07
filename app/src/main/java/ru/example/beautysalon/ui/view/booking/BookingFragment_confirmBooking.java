@@ -14,21 +14,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import ru.example.beautysalon.R;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 import ru.example.beautysalon.databinding.FragmentBookingConfirmBookingBinding;
-import ru.example.beautysalon.ui.viewModel.SharedViewModel;
+import ru.example.beautysalon.ui.viewModel.HomeNotificationViewModel;
+import ru.example.beautysalon.ui.viewModel.BookingConfirmViewModel;
 
 
 public class BookingFragment_confirmBooking extends Fragment {
-
-    private SharedViewModel sharedViewModel;
+    private String service, specialist, date_time;
+    private HomeNotificationViewModel homeNotificationViewModel;
+    private BookingConfirmViewModel bookingConfirmViewModel;
     private FragmentBookingConfirmBookingBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+        homeNotificationViewModel = new ViewModelProvider(requireActivity()).get(HomeNotificationViewModel.class);
+        bookingConfirmViewModel = new ViewModelProvider(requireActivity()).get(BookingConfirmViewModel.class);
 
     }
 
@@ -37,46 +44,50 @@ public class BookingFragment_confirmBooking extends Fragment {
         binding = FragmentBookingConfirmBookingBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        sharedViewModel.getLocation().observe(getViewLifecycleOwner(), location ->{
+        bookingConfirmViewModel.getLocation().observe(getViewLifecycleOwner(), location ->{
             switch (location) {
                 case "В салоне":
                     binding.CardViewServiceHeaderLocation.setText("Услуга в салоне");
-                    sharedViewModel.getAddress().observe(getViewLifecycleOwner(), address -> {
+                    bookingConfirmViewModel.getAddress().observe(getViewLifecycleOwner(), address -> {
                         binding.CardViewServiceAddress.setText(address);
                     });
                     break;
                 case "На дому":
                     binding.CardViewServiceHeaderLocation.setText("Услуга на дому");
-                    sharedViewModel.getAddress().observe(getViewLifecycleOwner(), address-> {
+                    bookingConfirmViewModel.getAddress().observe(getViewLifecycleOwner(), address-> {
                         binding.CardViewServiceAddress.setText(address);
                     });
-                    sharedViewModel.getApproach().observe(getViewLifecycleOwner(), approach -> {
+                    bookingConfirmViewModel.getApproach().observe(getViewLifecycleOwner(), approach -> {
                         binding.CardViewServiceAddress.append(", подъезд " + approach);
                     });
-                    sharedViewModel.getApartment().observe(getViewLifecycleOwner(), apartment -> {
+                    bookingConfirmViewModel.getApartment().observe(getViewLifecycleOwner(), apartment -> {
                         binding.CardViewServiceAddress.append(", кв. " + apartment);
                     });
                     break;
             }
         });
-        sharedViewModel.getNameService().observe(getViewLifecycleOwner(), nameService -> {
+        bookingConfirmViewModel.getNameService().observe(getViewLifecycleOwner(), nameService -> {
             binding.CardViewServiceServiceName.setText(nameService);
+            service = nameService;
         });
-        sharedViewModel.getPriceService().observe(getViewLifecycleOwner(), priceService -> {
+        bookingConfirmViewModel.getPriceService().observe(getViewLifecycleOwner(), priceService -> {
             binding.CardViewServiceServicePrice.setText(priceService + " рублей");
         });
-        sharedViewModel.getNameSpecialist().observe(getViewLifecycleOwner(), nameSpecialist -> {
+        bookingConfirmViewModel.getNameSpecialist().observe(getViewLifecycleOwner(), nameSpecialist -> {
             binding.CardViewServiceTextAvatar.setText(nameSpecialist.substring(0, 1));
             binding.CardViewServiceSpecialistName.setText(nameSpecialist);
+            specialist = nameSpecialist;
         });
-        sharedViewModel.getSpecialitySpecialist().observe(getViewLifecycleOwner(), specialitySpecialist -> {
+        bookingConfirmViewModel.getSpecialitySpecialist().observe(getViewLifecycleOwner(), specialitySpecialist -> {
             binding.CardViewServiceSpecialistSpeciality.setText(specialitySpecialist);
         });
-        sharedViewModel.getDate().observe(getViewLifecycleOwner(), date -> {
+        bookingConfirmViewModel.getDate().observe(getViewLifecycleOwner(), date -> {
             binding.CardViewServiceDate.setText(date);
+            date_time = date + ", ";
         });
-        sharedViewModel.getTime().observe(getViewLifecycleOwner(), time -> {
+        bookingConfirmViewModel.getTime().observe(getViewLifecycleOwner(), time -> {
             binding.CardViewServiceTime.setText(time + ", 1 час");
+            date_time += time;
         });
 
         return view;
@@ -86,14 +97,11 @@ public class BookingFragment_confirmBooking extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        sharedViewModel.getNameService().observe(getViewLifecycleOwner(), name -> {
-            Log.d("check", name);
-        });
-        sharedViewModel.getNameSpecialist().observe(getViewLifecycleOwner(), time -> {
-            Log.d("check", time);
-        });
-
         binding.buttonConfirm.setOnClickListener(v -> {
+            homeNotificationViewModel.addItem(getTime(), "Запись на услугу",
+                    "Услуга: " + service + "\n" +
+                            "Специалист: " + specialist + "\n" +
+                            "Дата: " + date_time);
             NavController navController = Navigation.findNavController(view);
             navController.popBackStack(navController.getGraph().getStartDestinationId(), false);
         });
@@ -101,5 +109,14 @@ public class BookingFragment_confirmBooking extends Fragment {
 
 
 
+    }
+
+    private String getTime() {
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm", Locale.getDefault());
+        String currentTime = dateFormat.format(calendar.getTime());
+        dateFormat = new SimpleDateFormat("d MMMM", Locale.getDefault());
+        String currentDate = dateFormat.format(new Date());
+        return (currentDate + ", " + currentTime);
     }
 }

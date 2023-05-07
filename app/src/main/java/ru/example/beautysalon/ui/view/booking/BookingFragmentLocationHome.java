@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.navigation.Navigation;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,19 +13,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import ru.example.beautysalon.R;
 import ru.example.beautysalon.databinding.FragmentBookingLocationHomeBinding;
-import ru.example.beautysalon.ui.viewModel.SharedViewModel;
+import ru.example.beautysalon.ui.viewModel.BookingConfirmViewModel;
 
 
 public class BookingFragmentLocationHome extends Fragment {
-    SharedViewModel sharedViewModel;
+    BookingConfirmViewModel bookingConfirmViewModel;
     FragmentBookingLocationHomeBinding binding;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedViewModel.class);
+        bookingConfirmViewModel = new ViewModelProvider(requireActivity()).get(BookingConfirmViewModel.class);
 
     }
 
@@ -52,7 +50,7 @@ public class BookingFragmentLocationHome extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                sharedViewModel.setAddress(String.valueOf(binding.address.getEditText().getText()));
+                bookingConfirmViewModel.setAddress(String.valueOf(binding.address.getEditText().getText()));
             }
 
             @Override
@@ -69,7 +67,7 @@ public class BookingFragmentLocationHome extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                sharedViewModel.setApproach(Integer.parseInt(String.valueOf(binding.approach.getEditText().getText())));
+                bookingConfirmViewModel.setApproach(Integer.parseInt(String.valueOf(binding.approach.getEditText().getText())));
             }
 
             @Override
@@ -86,7 +84,7 @@ public class BookingFragmentLocationHome extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                sharedViewModel.setIntercom(Integer.parseInt(String.valueOf(binding.intercom.getEditText().getText())));
+                bookingConfirmViewModel.setIntercom(Integer.parseInt(String.valueOf(binding.intercom.getEditText().getText())));
             }
 
             @Override
@@ -103,7 +101,7 @@ public class BookingFragmentLocationHome extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                sharedViewModel.setApartment(Integer.parseInt(String.valueOf(binding.apartment.getEditText().getText())));
+                bookingConfirmViewModel.setApartment(Integer.parseInt(String.valueOf(binding.apartment.getEditText().getText())));
             }
 
             @Override
@@ -120,7 +118,7 @@ public class BookingFragmentLocationHome extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                sharedViewModel.setFloor(Integer.parseInt(String.valueOf(binding.floor.getEditText().getText())));
+                bookingConfirmViewModel.setFloor(Integer.parseInt(String.valueOf(binding.floor.getEditText().getText())));
             }
 
             @Override
