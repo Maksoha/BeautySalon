@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.util.Log;
@@ -14,21 +15,26 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import ru.example.beautysalon.R;
 import ru.example.beautysalon.databinding.FragmentBrowsLashesBinding;
 import ru.example.beautysalon.ui.adapters.SpecialistAdapter;
+import ru.example.beautysalon.ui.viewModel.SpecialistViewModel;
 import ru.example.beautysalon.ui.viewModel.viewPagerSpecialist.BrowsLashesViewModel;
 
 
 public class BrowsLashesFragment extends Fragment {
 
     private FragmentBrowsLashesBinding binding;
-
+    private SpecialistViewModel specialistViewModel;
     private BrowsLashesViewModel browsLashesViewModel;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        browsLashesViewModel = new ViewModelProvider(this).get(BrowsLashesViewModel.class);
+        specialistViewModel = new ViewModelProvider(requireActivity()).get(SpecialistViewModel.class);
     }
 
     @Override
@@ -44,7 +50,6 @@ public class BrowsLashesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        browsLashesViewModel = new ViewModelProvider(this).get(BrowsLashesViewModel.class);
         setRecyclerView_specialistCard();
     }
 
@@ -58,6 +63,8 @@ public class BrowsLashesFragment extends Fragment {
         SpecialistAdapter specialistAdapter = new SpecialistAdapter(new SpecialistAdapter.SpecialistDiff());
         binding.fragmentBrowsLashesRecyclerView.setAdapter(specialistAdapter);
         specialistAdapter.setOnItemClickListener(((view, position) -> {
+            specialistViewModel.setSpecialist(specialistAdapter.getCurrentList().get(position));
+            Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_specialistFragment);
         }));
         binding.fragmentBrowsLashesRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         browsLashesViewModel.getItemsSpecialist().observe(getViewLifecycleOwner(), specialistAdapter::submitList);

@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_navigation_home_to_serviceFragment"
             app:destination="@id/serviceFragment" />
+        <action
+            android:id="@+id/action_navigation_home_to_specialistFragment"
+            app:destination="@id/specialistFragment" />
     </fragment>
 
     <fragment
@@ -82,5 +85,10 @@
         android:name="ru.example.beautysalon.ui.view.home.ServiceFragment"
         android:label="Услуга"
         tools:layout="@layout/fragment_service" />
+    <fragment
+        android:id="@+id/specialistFragment"
+        android:name="ru.example.beautysalon.ui.view.home.SpecialistFragment"
+        android:label="Специалист"
+        tools:layout="@layout/fragment_specialist" />
 
 </navigation>

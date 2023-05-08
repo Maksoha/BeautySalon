@@ -27,13 +27,13 @@ import ru.example.beautysalon.ui.adapters.SpecialistViewPagerAdapter;
 import ru.example.beautysalon.ui.adapters.TypeServiceAdapter;
 import ru.example.beautysalon.ui.viewModel.HomeViewModel;
 import ru.example.beautysalon.ui.viewModel.ServiceViewModel;
+import ru.example.beautysalon.ui.viewModel.SpecialistViewModel;
 
 public class HomeFragment extends Fragment {
 
     private HomeViewModel homeViewModel;
     private ServiceViewModel serviceViewModel;
     private SpecialistViewPagerAdapter viewPagerAdapter;
-
     private FragmentHomeBinding binding;
 
     @Override

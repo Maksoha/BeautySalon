@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
@@ -13,8 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import ru.example.beautysalon.R;
 import ru.example.beautysalon.databinding.FragmentHaircutBinding;
 import ru.example.beautysalon.ui.adapters.SpecialistAdapter;
+import ru.example.beautysalon.ui.viewModel.SpecialistViewModel;
+import ru.example.beautysalon.ui.viewModel.viewPagerSpecialist.FacialViewModel;
 import ru.example.beautysalon.ui.viewModel.viewPagerSpecialist.HaircutViewModel;
 
 
@@ -24,11 +28,16 @@ public class HaircutFragment extends Fragment {
     private FragmentHaircutBinding binding;
 
     private HaircutViewModel haircutViewModel;
+    private SpecialistViewModel specialistViewModel;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        haircutViewModel = new ViewModelProvider(this).get(HaircutViewModel.class);
+        specialistViewModel = new ViewModelProvider(requireActivity()).get(SpecialistViewModel.class);
+
     }
 
     @Override
@@ -44,7 +53,6 @@ public class HaircutFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        haircutViewModel = new ViewModelProvider(this).get(HaircutViewModel.class);
         setRecyclerView_specialistCard();
     }
 
@@ -57,6 +65,8 @@ public class HaircutFragment extends Fragment {
     private void setRecyclerView_specialistCard() {
         SpecialistAdapter specialistAdapter = new SpecialistAdapter(new SpecialistAdapter.SpecialistDiff());
         specialistAdapter.setOnItemClickListener(((view, position) -> {
+            specialistViewModel.setSpecialist(specialistAdapter.getCurrentList().get(position));
+            Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_specialistFragment);
         }));
         binding.fragmentHaircutRecyclerView.setAdapter(specialistAdapter);
         binding.fragmentHaircutRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

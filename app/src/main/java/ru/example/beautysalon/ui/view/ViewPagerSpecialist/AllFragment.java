@@ -10,10 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import ru.example.beautysalon.R;
+import ru.example.beautysalon.data.models.SpecialistModel;
 import ru.example.beautysalon.databinding.FragmentAllBinding;
 import ru.example.beautysalon.ui.adapters.SpecialistAdapter;
+import ru.example.beautysalon.ui.viewModel.SpecialistViewModel;
 import ru.example.beautysalon.ui.viewModel.viewPagerSpecialist.AllViewModel;
 
 
@@ -23,10 +27,14 @@ public class AllFragment extends Fragment {
 
     private AllViewModel allViewModel;
 
+    private SpecialistViewModel specialistViewModel;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        allViewModel = new ViewModelProvider(this).get(AllViewModel.class);
+        specialistViewModel = new ViewModelProvider(requireActivity()).get(SpecialistViewModel.class);
     }
 
     @Override
@@ -42,7 +50,6 @@ public class AllFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        allViewModel = new ViewModelProvider(this).get(AllViewModel.class);
         setRecyclerView_specialistCard();
     }
 
@@ -54,11 +61,12 @@ public class AllFragment extends Fragment {
 
     private void setRecyclerView_specialistCard() {
         SpecialistAdapter specialistAdapter = new SpecialistAdapter(new SpecialistAdapter.SpecialistDiff());
-        specialistAdapter.setOnItemClickListener(((view, position) -> {
-        }));
         binding.fragmentAllRecyclerView.setAdapter(specialistAdapter);
         binding.fragmentAllRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         allViewModel.getItemsSpecialist().observe(getViewLifecycleOwner(), specialistAdapter::submitList);
-
+        specialistAdapter.setOnItemClickListener(((view, position) -> {
+            specialistViewModel.setSpecialist(specialistAdapter.getCurrentList().get(position));
+            Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_specialistFragment);
+        }));
     }
 }

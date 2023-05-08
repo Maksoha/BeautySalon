@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 
 import ru.example.beautysalon.R;
 import ru.example.beautysalon.databinding.FragmentServiceBinding;
+import ru.example.beautysalon.databinding.FragmentSpecialistBinding;
 import ru.example.beautysalon.ui.adapters.PhotoAdapter;
 import ru.example.beautysalon.ui.adapters.ServiceImageAdapter;
 import ru.example.beautysalon.ui.adapters.SpecialistCardAdapter;

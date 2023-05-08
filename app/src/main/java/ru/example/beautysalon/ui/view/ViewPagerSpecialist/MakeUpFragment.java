@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
@@ -13,8 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import ru.example.beautysalon.R;
 import ru.example.beautysalon.databinding.FragmentMakeUpBinding;
 import ru.example.beautysalon.ui.adapters.SpecialistAdapter;
+import ru.example.beautysalon.ui.viewModel.SpecialistViewModel;
 import ru.example.beautysalon.ui.viewModel.viewPagerSpecialist.MakeUpViewModel;
 
 
@@ -22,11 +25,15 @@ public class MakeUpFragment extends Fragment {
     private FragmentMakeUpBinding binding;
 
     private MakeUpViewModel makeUpViewModel;
+    private SpecialistViewModel specialistViewModel;
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        makeUpViewModel = new ViewModelProvider(this).get(MakeUpViewModel.class);
+        specialistViewModel = new ViewModelProvider(requireActivity()).get(SpecialistViewModel.class);
     }
 
     @Override
@@ -42,7 +49,6 @@ public class MakeUpFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        makeUpViewModel = new ViewModelProvider(this).get(MakeUpViewModel.class);
         setRecyclerView_specialistCard();
     }
 
@@ -55,6 +61,8 @@ public class MakeUpFragment extends Fragment {
     private void setRecyclerView_specialistCard() {
         SpecialistAdapter specialistAdapter = new SpecialistAdapter(new SpecialistAdapter.SpecialistDiff());
         specialistAdapter.setOnItemClickListener(((view, position) -> {
+            specialistViewModel.setSpecialist(specialistAdapter.getCurrentList().get(position));
+            Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_specialistFragment);
         }));
         binding.fragmentMakeUpRecyclerView.setAdapter(specialistAdapter);
         binding.fragmentMakeUpRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
