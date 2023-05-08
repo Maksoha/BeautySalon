@@ -15,19 +15,27 @@ import ru.example.beautysalon.R;
 import ru.example.beautysalon.data.models.PhotoModel;
 import ru.example.beautysalon.data.models.ServiceImageModel;
 import ru.example.beautysalon.data.models.ServiceModel;
+import ru.example.beautysalon.data.models.SpecialistModel;
 import ru.example.beautysalon.data.repositories.ServicesRepository;
+import ru.example.beautysalon.data.repositories.SpecialistRepository;
 
 public class ServiceViewModel extends AndroidViewModel {
 
     private ServicesRepository servicesRepository;
+    private SpecialistRepository specialistRepository;
+    private MutableLiveData<List<ServiceImageModel>> browsLashesServiceItems = new MutableLiveData<>();
+    private MutableLiveData<List<ServiceImageModel>> facialIServicetems = new MutableLiveData<>();
+    private MutableLiveData<List<ServiceImageModel>> haircutServiceItems = new MutableLiveData<>();
+    private MutableLiveData<List<ServiceImageModel>> makeUpServiceItems = new MutableLiveData<>();
+    private MutableLiveData<List<ServiceImageModel>> manicureServiceItems = new MutableLiveData<>();
+    private MutableLiveData<List<ServiceImageModel>> waxingServiceItems = new MutableLiveData<>();
 
-    private MutableLiveData<List<ServiceImageModel>> browsLashesItems = new MutableLiveData<>();
-    private MutableLiveData<List<ServiceImageModel>> facialItems = new MutableLiveData<>();
-    private MutableLiveData<List<ServiceImageModel>> haircutItems = new MutableLiveData<>();
-    private MutableLiveData<List<ServiceImageModel>> makeUpItems = new MutableLiveData<>();
-    private MutableLiveData<List<ServiceImageModel>> manicureItems = new MutableLiveData<>();
-    private MutableLiveData<List<ServiceImageModel>> waxingItems = new MutableLiveData<>();
-
+    private LiveData<List<SpecialistModel>> browsLashesSpecialistItems;
+    private LiveData<List<SpecialistModel>> facialSpecialistItems;
+    private LiveData<List<SpecialistModel>> haircutSpecialistItems;
+    private LiveData<List<SpecialistModel>> makeUpSpecialistItems;
+    private LiveData<List<SpecialistModel>> manicureSpecialistItems;
+    private LiveData<List<SpecialistModel>> waxingSpecialistItems;
     private MutableLiveData<List<PhotoModel>> browsLashesImageResources = new MutableLiveData<>(Arrays.asList(new PhotoModel(R.drawable.brows_lashes1), new PhotoModel(R.drawable.brows_lashes2), new PhotoModel(R.drawable.brows_lashes3), new PhotoModel(R.drawable.brows_lashes4), new PhotoModel(R.drawable.brows_lashes5)));
     private MutableLiveData<List<PhotoModel>> facialImageResources = new MutableLiveData<>(Arrays.asList(new PhotoModel(R.drawable.facial1), new PhotoModel(R.drawable.facial2), new PhotoModel(R.drawable.facial3), new PhotoModel(R.drawable.facial4), new PhotoModel(R.drawable.facial5)));
     private MutableLiveData<List<PhotoModel>> haircutImageResources = new MutableLiveData<>(Arrays.asList(new PhotoModel(R.drawable.haircut1), new PhotoModel(R.drawable.haircut2), new PhotoModel(R.drawable.haircut3), new PhotoModel(R.drawable.haircut4), new PhotoModel(R.drawable.haircut5)));
@@ -41,10 +49,40 @@ public class ServiceViewModel extends AndroidViewModel {
         super(application);
 
         servicesRepository = new ServicesRepository(application);
+        specialistRepository = new SpecialistRepository(application);
+
+        browsLashesSpecialistItems = specialistRepository.getDatabaseDataBrowsLashes();
+        facialSpecialistItems = specialistRepository.getDatabaseDataFacial();
+        haircutSpecialistItems = specialistRepository.getDatabaseDataHaircut();
+        makeUpSpecialistItems = specialistRepository.getDatabaseDataMakeUp();
+        manicureSpecialistItems = specialistRepository.getDatabaseDataManicure();
+        waxingSpecialistItems = specialistRepository.getDatabaseDataWaxing();
 
     }
 
+    public LiveData<List<SpecialistModel>> getBrowsLashesSpecialistItems() {
+        return browsLashesSpecialistItems;
+    }
 
+    public LiveData<List<SpecialistModel>> getFacialSpecialistItems() {
+        return facialSpecialistItems;
+    }
+
+    public LiveData<List<SpecialistModel>> getHaircutSpecialistItems() {
+        return haircutSpecialistItems;
+    }
+
+    public LiveData<List<SpecialistModel>> getMakeUpSpecialistItems() {
+        return makeUpSpecialistItems;
+    }
+
+    public LiveData<List<SpecialistModel>> getManicureSpecialistItems() {
+        return manicureSpecialistItems;
+    }
+
+    public LiveData<List<SpecialistModel>> getWaxingSpecialistItems() {
+        return waxingSpecialistItems;
+    }
 
     public LiveData<List<ServiceImageModel>> getBrowsLashesItems() {
 
@@ -56,10 +94,10 @@ public class ServiceViewModel extends AndroidViewModel {
 
                 serviceImageModels.add(serviceImageModel);
             }
-            browsLashesItems.setValue(serviceImageModels);
+            browsLashesServiceItems.setValue(serviceImageModels);
         });
 
-        return browsLashesItems;
+        return browsLashesServiceItems;
     }
 
     public LiveData<List<ServiceImageModel>> getFacialItems() {
@@ -72,10 +110,10 @@ public class ServiceViewModel extends AndroidViewModel {
 
                 serviceImageModels.add(serviceImageModel);
             }
-            facialItems.setValue(serviceImageModels);
+            facialIServicetems.setValue(serviceImageModels);
         });
 
-        return facialItems;
+        return facialIServicetems;
     }
 
     public LiveData<List<ServiceImageModel>> getHaircutItems() {
@@ -88,10 +126,10 @@ public class ServiceViewModel extends AndroidViewModel {
 
                 serviceImageModels.add(serviceImageModel);
             }
-            haircutItems.setValue(serviceImageModels);
+            haircutServiceItems.setValue(serviceImageModels);
         });
 
-        return haircutItems;
+        return haircutServiceItems;
     }
 
     public LiveData<List<ServiceImageModel>> getMakeUpItems() {
@@ -104,10 +142,10 @@ public class ServiceViewModel extends AndroidViewModel {
 
                 serviceImageModels.add(serviceImageModel);
             }
-            makeUpItems.setValue(serviceImageModels);
+            makeUpServiceItems.setValue(serviceImageModels);
         });
 
-        return makeUpItems;
+        return makeUpServiceItems;
     }
 
     public LiveData<List<ServiceImageModel>> getManicureItems() {
@@ -120,10 +158,10 @@ public class ServiceViewModel extends AndroidViewModel {
 
                 serviceImageModels.add(serviceImageModel);
             }
-            manicureItems.setValue(serviceImageModels);
+            manicureServiceItems.setValue(serviceImageModels);
         });
 
-        return manicureItems;
+        return manicureServiceItems;
     }
 
     public LiveData<List<ServiceImageModel>> getWaxingItems() {
@@ -136,10 +174,10 @@ public class ServiceViewModel extends AndroidViewModel {
 
                 serviceImageModels.add(serviceImageModel);
             }
-            waxingItems.setValue(serviceImageModels);
+            waxingServiceItems.setValue(serviceImageModels);
         });
 
-        return waxingItems;
+        return waxingServiceItems;
     }
 
     public LiveData<List<PhotoModel>> getBrowsLashesImageResources() {

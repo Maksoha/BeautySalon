@@ -19,6 +19,7 @@ import ru.example.beautysalon.R;
 import ru.example.beautysalon.databinding.FragmentServiceBinding;
 import ru.example.beautysalon.ui.adapters.PhotoAdapter;
 import ru.example.beautysalon.ui.adapters.ServiceImageAdapter;
+import ru.example.beautysalon.ui.adapters.SpecialistCardAdapter;
 import ru.example.beautysalon.ui.viewModel.ServiceViewModel;
 
 
@@ -26,6 +27,8 @@ public class ServiceFragment extends Fragment {
     private FragmentServiceBinding binding;
     private ServiceViewModel viewModel;
     private String typeService;
+    private SnapHelper snapHelper = new LinearSnapHelper();
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,13 +46,45 @@ public class ServiceFragment extends Fragment {
 
         setRecyclerViewPhotoGallery();
         setRecyclerViewServices();
+        setRecyclerViewSpecialists();
         return view;
     }
+
+
 
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+    }
+
+    private void setRecyclerViewSpecialists() {
+        viewModel.getTypeService().observe(getViewLifecycleOwner(), typeService -> {
+            ((AppCompatActivity) requireActivity()).getSupportActionBar().setTitle(typeService);
+
+            SpecialistCardAdapter adapter = new SpecialistCardAdapter(new SpecialistCardAdapter.SpecialistCardDiff());
+            binding.recyclerViewSpecialists.setAdapter(adapter);
+            binding.recyclerViewSpecialists.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+            if (typeService.equals(getResources().getString(R.string.browsLashes))) {
+                viewModel.getBrowsLashesSpecialistItems().observe(getViewLifecycleOwner(), adapter::submitList);
+            }
+            else if (typeService.equals(getResources().getString(R.string.haircut))) {
+                viewModel.getHaircutSpecialistItems().observe(getViewLifecycleOwner(), adapter::submitList);
+            }
+            else if (typeService.equals(getResources().getString(R.string.facial))) {
+                viewModel.getFacialSpecialistItems().observe(getViewLifecycleOwner(), adapter::submitList);
+            }
+            else if (typeService.equals(getResources().getString(R.string.makeUp))) {
+                viewModel.getMakeUpSpecialistItems().observe(getViewLifecycleOwner(), adapter::submitList);
+            }
+            else if (typeService.equals(getResources().getString(R.string.manicure))) {
+                viewModel.getManicureSpecialistItems().observe(getViewLifecycleOwner(), adapter::submitList);
+            }
+            else if (typeService.equals(getResources().getString(R.string.waxing))) {
+                viewModel.getWaxingSpecialistItems().observe(getViewLifecycleOwner(), adapter::submitList);
+            }
+        });
+        snapHelper.attachToRecyclerView(binding.recyclerViewServices);
     }
 
     private void setRecyclerViewServices() {
@@ -78,7 +113,6 @@ public class ServiceFragment extends Fragment {
             viewModel.getWaxingItems().observe(getViewLifecycleOwner(), adapter::submitList);
         }
         });
-        SnapHelper snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(binding.recyclerViewServices);
     }
 
@@ -109,8 +143,6 @@ public class ServiceFragment extends Fragment {
                 viewModel.getWaxingImageResources().observe(getViewLifecycleOwner(), adapter::submitList);
             }
         });
-
-        SnapHelper snapHelper = new LinearSnapHelper();
         snapHelper.attachToRecyclerView(binding.recyclerViewPhotoGallery);
 
     }
