@@ -25,5 +25,5 @@ public class BookingViewModel extends AndroidViewModel {
         itemsService = typeServiceRepository.getDatabaseData();
     }
 
-    public LiveData<List<TypeServiceModel>> getItemsService() {return  itemsService;}
+    public LiveData<List<TypeServiceModel>> getItemsService() {return itemsService;}
 }

@@ -110,4 +110,11 @@
     </string>
     <string name="action_settings">Settings</string>
     <string name="phone">Телефон</string>
+    <string name="browsLashes">Брови/Ресницы</string>
+    <string name="facial">Косметология</string>
+    <string name="haircut">Парикмахер</string>
+    <string name="makeUp">Визаж</string>
+    <string name="manicure">Маникюр/Педикюр</string>
+    <string name="waxing">Депиляция</string>
+
 </resources>

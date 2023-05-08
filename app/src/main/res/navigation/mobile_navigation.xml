@@ -80,7 +80,7 @@
     <fragment
         android:id="@+id/serviceFragment"
         android:name="ru.example.beautysalon.ui.view.home.ServiceFragment"
-        android:label="fragment_service"
+        android:label="Услуга"
         tools:layout="@layout/fragment_service" />
 
 </navigation>

@@ -21,7 +21,7 @@ public class ServiceViewHolder extends RecyclerView.ViewHolder {
 
     public void bind (String name, int price) {
         binding.cardServiceBookingServiceName.setText(name);
-        binding.cardServiceBookingServicePrice.setText(price + " рублей");
+        binding.cardServiceBookingServicePrice.setText(price + " руб.");
     }
 
     static ServiceViewHolder create(ViewGroup parent) {

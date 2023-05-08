@@ -4,17 +4,17 @@ import ru.example.beautysalon.R;
 
 public class PhotoModel {
 
-    private int photoId = R.drawable.haircut;
+    private int imageResourceId;
 
-    public PhotoModel(int photoId) {
-        this.photoId = photoId;
+    public PhotoModel(int imageResourceId) {
+        this.imageResourceId = imageResourceId;
     }
 
-    public int getPhotoId() {
-        return photoId;
+    public int getImageResourceId() {
+        return imageResourceId;
     }
 
-    public void setPhotoId(int photoId) {
-        this.photoId = photoId;
+    public void setImageResourceId(int imageResourceId) {
+        this.imageResourceId = imageResourceId;
     }
 }

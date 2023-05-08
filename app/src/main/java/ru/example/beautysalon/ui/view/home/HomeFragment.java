@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.LinearSnapHelper;
+import androidx.recyclerview.widget.SnapHelper;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -103,8 +105,11 @@ public class HomeFragment extends Fragment {
         SaleAdapter saleAdapter = new SaleAdapter(new SaleAdapter.SaleDiff());
         binding.fragmentHomeRecyclerViewSales.setAdapter(saleAdapter);
         binding.fragmentHomeRecyclerViewSales.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-
         homeViewModel.getItemsSale().observe(getViewLifecycleOwner(), saleAdapter::submitList);
+
+        SnapHelper snapHelper = new LinearSnapHelper();
+        snapHelper.attachToRecyclerView(binding.fragmentHomeRecyclerViewSales);
+
     }
 
     private void setRecyclerView_service() {

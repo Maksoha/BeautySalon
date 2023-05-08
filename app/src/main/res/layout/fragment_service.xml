@@ -16,36 +16,43 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Фотогалерея"
-            style="@style/TextAppearance.Material3.HeadlineMedium"
+            android:layout_margin="16dp"
+            style="@style/TextAppearance.Material3.HeadlineSmall"
             app:layout_constraintTop_toTopOf="parent" />
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:id="@+id/recyclerView_photoGallery"
-            app:layout_constraintTop_toBottomOf="@id/text_photoGallery"/>
+            app:layout_constraintTop_toBottomOf="@id/text_photoGallery"
+            android:layout_marginVertical="10dp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/text_services"
             android:text="@string/text_services"
-            style="@style/TextAppearance.Material3.HeadlineMedium"
+            android:layout_margin="16dp"
+            style="@style/TextAppearance.Material3.HeadlineSmall"
             app:layout_constraintTop_toBottomOf="@id/recyclerView_photoGallery"/>
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/recyclerView_services"
-            app:layout_constraintTop_toBottomOf="@id/text_services"/>
+            app:layout_constraintTop_toBottomOf="@id/text_services"
+            android:layout_marginVertical="10dp"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/text_specialists"
             android:text="@string/text_specialists"
-            style="@style/TextAppearance.Material3.HeadlineMedium"
+            android:layout_margin="16dp"
+            style="@style/TextAppearance.Material3.HeadlineSmall"
             app:layout_constraintTop_toBottomOf="@id/recyclerView_services"/>
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/recyclerView_specialists"
-            app:layout_constraintTop_toBottomOf="@id/text_specialists"/>
+            app:layout_constraintTop_toBottomOf="@id/text_specialists"
+            android:layout_marginVertical="10dp"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
