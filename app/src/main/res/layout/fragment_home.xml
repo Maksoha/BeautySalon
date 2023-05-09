@@ -27,21 +27,21 @@
             style="@style/TextAppearance.Material3.HeadlineSmall"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"/>
-        <ImageView
-            android:layout_width="0dp"
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/fragment_home_icon_notification"
-            android:padding="16dp"
-            android:src="@drawable/baseline_notifications_24"
+            android:id="@+id/btn_notification"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toRightOf="parent"/>
+            android:layout_margin="10dp"
+            app:layout_constraintRight_toRightOf="parent"
+            style="@style/Widget.Material3.Button.IconButton.Filled"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/fragment_home_recycler_view_sales"
         app:layout_constraintTop_toBottomOf="@id/fragment_home_header"
-        android:orientation="horizontal" />
+        android:layout_marginVertical="10dp" />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -49,8 +49,13 @@ public class SpecialistFragment extends Fragment {
             ((AppCompatActivity) requireActivity()).getSupportActionBar().setTitle(specialistModel.getSpeciality());
             binding.textAvatar.setText(specialistModel.getName().substring(0, 1));
             binding.name.setText(specialistModel.getName());
-            binding.speciality.setText(specialistModel.getSpeciality());
-            binding.description.setText("Опыт работы: " + specialistModel.getName().length() + " лет");
+
+            if (specialistModel.getName().length() < 5) {
+                binding.description.setText("Опыт работы: " + specialistModel.getName().length() + " года");
+            }
+            else {
+                binding.description.setText("Опыт работы: " + specialistModel.getName().length() + " лет");
+            }
 
             PhotoAdapter photoAdapter = new PhotoAdapter(new PhotoAdapter.PhotoDiff());
             binding.recyclerViewPhotoGallery.setAdapter(photoAdapter);
@@ -60,7 +65,6 @@ public class SpecialistFragment extends Fragment {
             binding.recyclerViewServices.setAdapter(serviceAdapter);
             binding.recyclerViewServices.setLayoutManager(new LinearLayoutManager(getContext()));
             serviceAdapter.setOnItemClickListener((view1, position) -> {
-
             });
             switch (specialistModel.getSpeciality()) {
                 case "Лашмейкер": {

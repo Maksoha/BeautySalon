@@ -6,10 +6,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.ListAdapter;
 
+import ru.example.beautysalon.R;
 import ru.example.beautysalon.data.models.SpecialistModel;
 
 public class SpecialistCardAdapter extends ListAdapter<SpecialistModel, SpecialistCardViewHolder> {
+    private OnItemClickListener listener;
 
+    public interface OnItemClickListener {
+        void onItemClick(SpecialistModel specialist);
+    }
     public SpecialistCardAdapter(@NonNull DiffUtil.ItemCallback<SpecialistModel> diffCallback) {
         super(diffCallback);
     }
@@ -24,6 +29,15 @@ public class SpecialistCardAdapter extends ListAdapter<SpecialistModel, Speciali
     public void onBindViewHolder(@NonNull SpecialistCardViewHolder holder, int position) {
         SpecialistModel current = getItem(position);
         holder.bind(current.getName().substring(0, 1), current.getName(), current.getSpeciality());
+        holder.itemView.findViewById(R.id.button).setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onItemClick(current);
+            }
+        });
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
     public static class SpecialistCardDiff extends DiffUtil.ItemCallback<SpecialistModel> {

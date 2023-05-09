@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
@@ -49,6 +50,9 @@ public class HomeFragment extends Fragment {
 
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+
+        binding.btnNotification.setIcon(ContextCompat.getDrawable(getContext(), R.drawable.ic_notifications_black_24dp));
+
         int hour = LocalDateTime.now().getHour();
         if (hour >= 0 && hour < 6) {
             binding.fragmentHomeTextHello.setText("Доброй ночи");
@@ -72,7 +76,7 @@ public class HomeFragment extends Fragment {
         setRecyclerView_sale();
         setRecyclerView_service();
         setTabLayout_specialists();
-        binding.fragmentHomeIconNotification.setOnClickListener(v -> {
+        binding.btnNotification.setOnClickListener(v -> {
             Navigation.findNavController(view).navigate(R.id.action_navigation_home_to_notificationFragment);
         });
     }

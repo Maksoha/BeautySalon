@@ -84,7 +84,14 @@
         android:id="@+id/serviceFragment"
         android:name="ru.example.beautysalon.ui.view.home.ServiceFragment"
         android:label="Услуга"
-        tools:layout="@layout/fragment_service" />
+        tools:layout="@layout/fragment_service" >
+        <action
+            android:id="@+id/action_serviceFragment_to_specialistFragment"
+            app:destination="@id/specialistFragment" />
+        <action
+            android:id="@+id/action_serviceFragment_to_navigation_booking"
+            app:destination="@id/navigation_booking" />
+    </fragment>
     <fragment
         android:id="@+id/specialistFragment"
         android:name="ru.example.beautysalon.ui.view.home.SpecialistFragment"

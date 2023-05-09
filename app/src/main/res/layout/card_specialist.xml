@@ -62,17 +62,6 @@
                 android:layout_marginTop="8dp"
                 android:textColor="@color/onSurface">
             </TextView>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/specialist_card_btn_info"
-                android:padding="8dp"
-                android:layout_marginEnd="20dp"
-                android:src="@drawable/outline_info_24"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent">
-            </ImageView>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
 </LinearLayout>
