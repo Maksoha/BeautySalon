@@ -65,6 +65,7 @@ public class BookingFragment_SelectDate extends Fragment {
 
         picker.addOnPositiveButtonClickListener(selection -> {
             Date date = new Date(selection);
+            bookingConfirmViewModel.setExactTime(date);
             SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE, d MMMM", Locale.getDefault());
             String formattedDate = dateFormat.format(date);
             binding.fragmentBookingSelectDateTextDate.setText(formattedDate);

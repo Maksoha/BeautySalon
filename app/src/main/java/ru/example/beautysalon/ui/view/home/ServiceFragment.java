@@ -6,7 +6,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.NavHost;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
@@ -65,11 +68,9 @@ public class ServiceFragment extends Fragment {
 
     private void setRecyclerViewSpecialists(View view) {
         viewModel.getTypeService().observe(getViewLifecycleOwner(), typeService -> {
-            ((AppCompatActivity) requireActivity()).getSupportActionBar().setTitle(typeService);
-
-
             SpecialistCardAdapter adapter = new SpecialistCardAdapter(new SpecialistCardAdapter.SpecialistCardDiff());
             adapter.setOnItemClickListener(specialist -> {
+
                 specialistViewModel.setSpecialist(new SpecialistModel(specialist.getName(), specialist.getSpeciality()));
                 Navigation.findNavController(view).navigate(R.id.action_serviceFragment_to_specialistFragment);
             });
@@ -99,12 +100,14 @@ public class ServiceFragment extends Fragment {
 
     private void setRecyclerViewServices(View view) {
         viewModel.getTypeService().observe(getViewLifecycleOwner(), typeService -> {
-            ((AppCompatActivity) requireActivity()).getSupportActionBar().setTitle(typeService);
 
         ServiceImageAdapter adapter = new ServiceImageAdapter(new ServiceImageAdapter.ServiceImageDiff());
-        adapter.setOnItemClickListener(serviceImageModel -> {
-            Navigation.findNavController(view).navigate(R.id.action_serviceFragment_to_navigation_booking);
-        });
+            adapter.setOnItemClickListener(serviceImageModel -> {
+                NavController navController = Navigation.findNavController(view);
+//                navController.popBackStack(R.id.navigation_booking, false);
+
+                navController.navigate(R.id.action_serviceFragment_to_navigation_booking);
+            });
         binding.recyclerViewServices.setAdapter(adapter);
         binding.recyclerViewServices.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
         if (typeService.equals(getResources().getString(R.string.browsLashes))) {
@@ -131,8 +134,6 @@ public class ServiceFragment extends Fragment {
 
     private void setRecyclerViewPhotoGallery() {
         viewModel.getTypeService().observe(getViewLifecycleOwner(), typeService -> {
-            ((AppCompatActivity) requireActivity()).getSupportActionBar().setTitle(typeService);
-
             PhotoAdapter adapter = new PhotoAdapter(new PhotoAdapter.PhotoDiff());
             binding.recyclerViewPhotoGallery.setAdapter(adapter);
             binding.recyclerViewPhotoGallery.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));

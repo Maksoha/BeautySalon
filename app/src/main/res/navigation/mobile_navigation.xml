@@ -21,11 +21,6 @@
             app:destination="@id/specialistFragment" />
     </fragment>
 
-    <fragment
-        android:id="@+id/navigation_sale"
-        android:name="ru.example.beautysalon.ui.view.sale.SaleFragment"
-        android:label="@string/title_sale"
-        tools:layout="@layout/fragment_sale" />
 
     <fragment
         android:id="@+id/navigation_booking"
@@ -43,11 +38,6 @@
         android:label="@string/title_map"
         tools:layout="@layout/fragment_maps"/>
 
-    <fragment
-        android:id="@+id/navigation_profile"
-        android:name="ru.example.beautysalon.ui.view.profile.StartProfileFragment"
-        android:label="@string/title_profile"
-        tools:layout="@layout/fragment_start_profile"/>
     <fragment
         android:id="@+id/bookingFragment_SelectSpecialist"
         android:name="ru.example.beautysalon.ui.view.booking.BookingFragment_SelectSpecialist"

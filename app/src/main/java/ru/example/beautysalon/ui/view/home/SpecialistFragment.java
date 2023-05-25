@@ -46,7 +46,6 @@ public class SpecialistFragment extends Fragment {
         View view = binding.getRoot();
 
         viewModel.getSpecialist().observe(getViewLifecycleOwner(), specialistModel -> {
-            ((AppCompatActivity) requireActivity()).getSupportActionBar().setTitle(specialistModel.getSpeciality());
             binding.textAvatar.setText(specialistModel.getName().substring(0, 1));
             binding.name.setText(specialistModel.getName());
 

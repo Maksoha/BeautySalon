@@ -5,10 +5,6 @@
         android:icon="@drawable/ic_home_black_24dp"
         android:title="@string/title_home" />
     <item
-        android:id="@+id/navigation_sale"
-        android:icon="@drawable/baseline_percent_24"
-        android:title="@string/title_sale" />
-    <item
         android:id="@+id/navigation_booking"
         android:icon="@drawable/baseline_menu_book_24"
         android:title="@string/title_booking" />
@@ -17,7 +13,4 @@
         android:icon="@drawable/baseline_place_24"
         android:title="@string/title_map"/>
 
-    <item android:id="@+id/navigation_profile"
-        android:icon="@drawable/baseline_account_box_24"
-        android:title="@string/title_profile"/>
 </menu>

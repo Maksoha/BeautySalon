@@ -35,11 +35,6 @@ public class ServiceImageAdapter extends ListAdapter<ServiceImageModel, ServiceI
     public void onBindViewHolder(@NonNull ServiceImageViewHolder holder, int position) {
         ServiceImageModel current = getItem(position);
         holder.bind(current.getImageResourceId(), current.getName(), current.getPrice());
-        holder.itemView.findViewById(R.id.button).setOnClickListener(v -> {
-            if (listener != null) {
-                listener.onItemClick(current);
-            }
-        });
 
     }
 

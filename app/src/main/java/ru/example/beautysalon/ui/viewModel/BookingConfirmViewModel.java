@@ -6,6 +6,8 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import java.util.Date;
+
 
 public class BookingConfirmViewModel extends ViewModel {
     private MutableLiveData<Boolean> selectAddress = new MutableLiveData<>(false);
@@ -21,7 +23,7 @@ public class BookingConfirmViewModel extends ViewModel {
     private MutableLiveData<String> nameSpecialist = new MutableLiveData<>();
     private MutableLiveData<String> specialitySpecialist = new MutableLiveData<>();
     private MutableLiveData<String> location = new MutableLiveData<>("В салоне");
-
+    private MutableLiveData<Date> exactTime = new MutableLiveData<>();
     private MutableLiveData<String> address = new MutableLiveData<>();
     public LiveData<Boolean> getSelectAddress() {return selectAddress;}
     public LiveData<Integer> getApproach() {
@@ -40,7 +42,7 @@ public class BookingConfirmViewModel extends ViewModel {
     public LiveData<String> getDate() {
         return date;
     }
-
+    public LiveData<Date> getExactTime() {return exactTime;}
     public LiveData<String> getTime() {
         return time;
     }
@@ -66,6 +68,10 @@ public class BookingConfirmViewModel extends ViewModel {
 
     public LiveData<Integer> getPriceService() {
         return priceService;
+    }
+
+    public void setExactTime(Date exactTime) {
+        this.exactTime.setValue(exactTime);
     }
     public void setSelectAddress(Boolean selectAddress) {this.selectAddress.setValue(selectAddress);}
     public void setApproach(Integer approach) {this.approach.setValue(approach);}

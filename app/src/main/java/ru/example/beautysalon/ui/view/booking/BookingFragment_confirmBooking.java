@@ -1,22 +1,34 @@
 package ru.example.beautysalon.ui.view.booking;
 
+import android.Manifest;
+import android.content.ContentValues;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import android.provider.CalendarContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 import ru.example.beautysalon.databinding.FragmentBookingConfirmBookingBinding;
@@ -29,6 +41,8 @@ public class BookingFragment_confirmBooking extends Fragment {
     private HomeNotificationViewModel homeNotificationViewModel;
     private BookingConfirmViewModel bookingConfirmViewModel;
     private FragmentBookingConfirmBookingBinding binding;
+    private static final int REQUEST_CALENDAR_PERMISSION = 1;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -98,17 +112,74 @@ public class BookingFragment_confirmBooking extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         binding.buttonConfirm.setOnClickListener(v -> {
+
             homeNotificationViewModel.addItem(getTime(), "Запись на услугу",
                     "Услуга: " + service + "\n" +
                             "Специалист: " + specialist + "\n" +
                             "Дата: " + date_time);
+            openCalendar();
+
             NavController navController = Navigation.findNavController(view);
             navController.popBackStack(navController.getGraph().getStartDestinationId(), false);
         });
 
 
+    }
+    private void openCalendar() {
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_CALENDAR)
+                == PackageManager.PERMISSION_GRANTED) {
+            // Разрешение предоставлено, открываем календарь
+            Intent intent = new Intent(Intent.ACTION_INSERT);
+            intent.setData(CalendarContract.Events.CONTENT_URI);
 
+            MutableLiveData<String> description = new MutableLiveData<>();
 
+            bookingConfirmViewModel.getLocation().observe(getViewLifecycleOwner(), location->{
+                if (location.equals("В салоне"))
+                    intent.putExtra(CalendarContract.Events.TITLE, "Услуга в салоне");
+                else if (location.equals("На дому"))
+                    intent.putExtra(CalendarContract.Events.TITLE, "Услуга на дому");
+            });
+            bookingConfirmViewModel.getTypeService().observe(getViewLifecycleOwner(), typeService-> {
+                description.setValue("Услуга : " + typeService);
+            });
+            bookingConfirmViewModel.getNameSpecialist().observe(getViewLifecycleOwner(), specialist -> {
+                description.setValue(description.getValue() + "\nСпециалист : " + specialist );
+            });
+
+            intent.putExtra(CalendarContract.Events.DESCRIPTION, description.getValue());
+            bookingConfirmViewModel.getAddress().observe(getViewLifecycleOwner(), address-> {
+                intent.putExtra(CalendarContract.Events.EVENT_LOCATION, address);
+            });
+
+            MutableLiveData<Long> calendarTime = new MutableLiveData<>();
+
+            bookingConfirmViewModel.getExactTime().observe(getViewLifecycleOwner(), exactTime-> {
+                calendarTime.setValue(exactTime.getTime());
+            });
+            bookingConfirmViewModel.getTime().observe(getViewLifecycleOwner(), time -> {
+                String pattern = "HH:mm";
+
+                SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+
+                try {
+                    Date date = sdf.parse(time);
+                    calendarTime.setValue(calendarTime.getValue() + date.getTime());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            });
+            intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, calendarTime.getValue());
+            intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, calendarTime.getValue() + 3600000);
+
+            startActivity(intent);
+        } else {
+            // Разрешение не предоставлено, запросите разрешение у пользователя
+            ActivityCompat.requestPermissions(requireActivity(),
+                    new String[]{Manifest.permission.READ_CALENDAR},
+                    REQUEST_CALENDAR_PERMISSION);
+            openCalendar();
+        }
     }
 
     private String getTime() {
