@@ -43,11 +43,9 @@ import ru.example.beautysalon.ui.viewModel.BookingConfirmViewModel;
 
 
 public class BookingFragment_confirmBooking extends Fragment {
-    private String service, specialist, date_time;
+    private String service, specialist, date_time, address_card;
     private HomeNotificationViewModel homeNotificationViewModel;
     private BookingConfirmViewModel bookingConfirmViewModel;
-    private MutableLiveData<String> name_check = new MutableLiveData<>();
-    private MutableLiveData<String> phone_check = new MutableLiveData<>();
     private FragmentBookingConfirmBookingBinding binding;
     private static final int REQUEST_CALENDAR_PERMISSION = 1;
 
@@ -72,18 +70,22 @@ public class BookingFragment_confirmBooking extends Fragment {
                     binding.CardViewServiceHeaderLocation.setText("Услуга в салоне");
                     bookingConfirmViewModel.getAddress().observe(getViewLifecycleOwner(), address -> {
                         binding.CardViewServiceAddress.setText(address);
+                        address_card = address;
                     });
                     break;
                 case "На дому":
                     binding.CardViewServiceHeaderLocation.setText("Услуга на дому");
                     bookingConfirmViewModel.getAddress().observe(getViewLifecycleOwner(), address-> {
                         binding.CardViewServiceAddress.setText(address);
+                        address_card = address;
                     });
                     bookingConfirmViewModel.getApproach().observe(getViewLifecycleOwner(), approach -> {
                         binding.CardViewServiceAddress.append(", подъезд " + approach);
+                        address_card += ", подъезд " + approach;
                     });
                     bookingConfirmViewModel.getApartment().observe(getViewLifecycleOwner(), apartment -> {
                         binding.CardViewServiceAddress.append(", кв. " + apartment);
+                        address_card += ", кв. " + apartment;
                     });
                     break;
             }
@@ -124,7 +126,8 @@ public class BookingFragment_confirmBooking extends Fragment {
             homeNotificationViewModel.addItem(getTime(), "Запись на услугу",
                     "Услуга: " + service + "\n" +
                             "Специалист: " + specialist + "\n" +
-                            "Дата: " + date_time);
+                            "Дата: " + date_time + "\n" +
+                            "Адрес: " + binding.CardViewServiceAddress.getText());
 
 
             if (binding.textFieldName.getEditText().length() == 0) {
@@ -195,7 +198,54 @@ public class BookingFragment_confirmBooking extends Fragment {
             ActivityCompat.requestPermissions(requireActivity(),
                     new String[]{Manifest.permission.READ_CALENDAR},
                     REQUEST_CALENDAR_PERMISSION);
-            openCalendar();
+        }
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_CALENDAR)
+                == PackageManager.PERMISSION_GRANTED) {
+            // Разрешение предоставлено, открываем календарь
+            Intent intent = new Intent(Intent.ACTION_INSERT);
+            intent.setData(CalendarContract.Events.CONTENT_URI);
+
+            MutableLiveData<String> description = new MutableLiveData<>();
+
+            bookingConfirmViewModel.getLocation().observe(getViewLifecycleOwner(), location->{
+                if (location.equals("В салоне"))
+                    intent.putExtra(CalendarContract.Events.TITLE, "Услуга в салоне");
+                else if (location.equals("На дому"))
+                    intent.putExtra(CalendarContract.Events.TITLE, "Услуга на дому");
+            });
+            bookingConfirmViewModel.getTypeService().observe(getViewLifecycleOwner(), typeService-> {
+                description.setValue("Услуга : " + typeService);
+            });
+            bookingConfirmViewModel.getNameSpecialist().observe(getViewLifecycleOwner(), specialist -> {
+                description.setValue(description.getValue() + "\nСпециалист : " + specialist );
+            });
+
+            intent.putExtra(CalendarContract.Events.DESCRIPTION, description.getValue());
+            bookingConfirmViewModel.getAddress().observe(getViewLifecycleOwner(), address-> {
+                intent.putExtra(CalendarContract.Events.EVENT_LOCATION, address);
+            });
+
+            MutableLiveData<Long> calendarTime = new MutableLiveData<>();
+
+            bookingConfirmViewModel.getExactTime().observe(getViewLifecycleOwner(), exactTime-> {
+                calendarTime.setValue(exactTime.getTime());
+            });
+            bookingConfirmViewModel.getTime().observe(getViewLifecycleOwner(), time -> {
+                String pattern = "HH:mm";
+
+                SimpleDateFormat sdf = new SimpleDateFormat(pattern);
+
+                try {
+                    Date date = sdf.parse(time);
+                    calendarTime.setValue(calendarTime.getValue() + date.getTime());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            });
+            intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, calendarTime.getValue());
+            intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, calendarTime.getValue() + 3600000);
+
+            startActivity(intent);
         }
     }
 
