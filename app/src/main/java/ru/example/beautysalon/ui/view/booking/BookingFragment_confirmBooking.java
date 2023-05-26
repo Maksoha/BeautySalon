@@ -146,9 +146,6 @@ public class BookingFragment_confirmBooking extends Fragment {
 
     }
     private void openCalendar() {
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_CALENDAR)
-                == PackageManager.PERMISSION_GRANTED) {
-            // Разрешение предоставлено, открываем календарь
             Intent intent = new Intent(Intent.ACTION_INSERT);
             intent.setData(CalendarContract.Events.CONTENT_URI);
 
@@ -193,60 +190,8 @@ public class BookingFragment_confirmBooking extends Fragment {
             intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, calendarTime.getValue() + 3600000);
 
             startActivity(intent);
-        } else {
-            // Разрешение не предоставлено, запросите разрешение у пользователя
-            ActivityCompat.requestPermissions(requireActivity(),
-                    new String[]{Manifest.permission.READ_CALENDAR},
-                    REQUEST_CALENDAR_PERMISSION);
-        }
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_CALENDAR)
-                == PackageManager.PERMISSION_GRANTED) {
-            // Разрешение предоставлено, открываем календарь
-            Intent intent = new Intent(Intent.ACTION_INSERT);
-            intent.setData(CalendarContract.Events.CONTENT_URI);
 
-            MutableLiveData<String> description = new MutableLiveData<>();
 
-            bookingConfirmViewModel.getLocation().observe(getViewLifecycleOwner(), location->{
-                if (location.equals("В салоне"))
-                    intent.putExtra(CalendarContract.Events.TITLE, "Услуга в салоне");
-                else if (location.equals("На дому"))
-                    intent.putExtra(CalendarContract.Events.TITLE, "Услуга на дому");
-            });
-            bookingConfirmViewModel.getTypeService().observe(getViewLifecycleOwner(), typeService-> {
-                description.setValue("Услуга : " + typeService);
-            });
-            bookingConfirmViewModel.getNameSpecialist().observe(getViewLifecycleOwner(), specialist -> {
-                description.setValue(description.getValue() + "\nСпециалист : " + specialist );
-            });
-
-            intent.putExtra(CalendarContract.Events.DESCRIPTION, description.getValue());
-            bookingConfirmViewModel.getAddress().observe(getViewLifecycleOwner(), address-> {
-                intent.putExtra(CalendarContract.Events.EVENT_LOCATION, address);
-            });
-
-            MutableLiveData<Long> calendarTime = new MutableLiveData<>();
-
-            bookingConfirmViewModel.getExactTime().observe(getViewLifecycleOwner(), exactTime-> {
-                calendarTime.setValue(exactTime.getTime());
-            });
-            bookingConfirmViewModel.getTime().observe(getViewLifecycleOwner(), time -> {
-                String pattern = "HH:mm";
-
-                SimpleDateFormat sdf = new SimpleDateFormat(pattern);
-
-                try {
-                    Date date = sdf.parse(time);
-                    calendarTime.setValue(calendarTime.getValue() + date.getTime());
-                } catch (ParseException e) {
-                    e.printStackTrace();
-                }
-            });
-            intent.putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, calendarTime.getValue());
-            intent.putExtra(CalendarContract.EXTRA_EVENT_END_TIME, calendarTime.getValue() + 3600000);
-
-            startActivity(intent);
-        }
     }
 
     private String getTime() {
