@@ -10,7 +10,6 @@ import java.util.Date;
 
 
 public class BookingConfirmViewModel extends ViewModel {
-    private MutableLiveData<Boolean> selectAddress = new MutableLiveData<>(false);
     private MutableLiveData<Integer> approach = new MutableLiveData<>();
     private MutableLiveData<Integer> intercom = new MutableLiveData<>();
     private MutableLiveData<Integer> apartment = new MutableLiveData<>();
@@ -25,7 +24,6 @@ public class BookingConfirmViewModel extends ViewModel {
     private MutableLiveData<String> location = new MutableLiveData<>("В салоне");
     private MutableLiveData<Date> exactTime = new MutableLiveData<>();
     private MutableLiveData<String> address = new MutableLiveData<>();
-    public LiveData<Boolean> getSelectAddress() {return selectAddress;}
     public LiveData<Integer> getApproach() {
         return approach;
     }
@@ -73,7 +71,6 @@ public class BookingConfirmViewModel extends ViewModel {
     public void setExactTime(Date exactTime) {
         this.exactTime.setValue(exactTime);
     }
-    public void setSelectAddress(Boolean selectAddress) {this.selectAddress.setValue(selectAddress);}
     public void setApproach(Integer approach) {this.approach.setValue(approach);}
     public void setIntercom(Integer intercom) {this.intercom.setValue(intercom);}
     public void setApartment(Integer apartment) {this.apartment.setValue(apartment);}

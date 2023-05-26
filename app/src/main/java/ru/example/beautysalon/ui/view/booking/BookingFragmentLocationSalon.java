@@ -40,6 +40,7 @@ public class BookingFragmentLocationSalon extends Fragment {
 
         binding = FragmentBookingLocationSalonBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+        bookingConfirmViewModel.setAddress("");
         viewModel.getItemsAddress().observe(getViewLifecycleOwner(), address -> {
             ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), R.layout.item_salon_location,
                     address.stream().map(AddressModel::getAddress).toArray(String[]::new));

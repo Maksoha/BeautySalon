@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -97,7 +98,12 @@ public class BookingFragment_SelectDate extends Fragment {
                 TimeModel timeModel = timeAdapter.getCurrentList().get(position);
                 bookingConfirmViewModel.setTime(timeModel.getTime());
                 bookingConfirmViewModel.setDate(binding.fragmentBookingSelectDateTextDate.getText().toString());
-                Navigation.findNavController(view).navigate(R.id.action_bookingFragment_SelectDate_to_bookingFragment_confirmBooking);
+                if (binding.fragmentBookingSelectDateTextDate.getText().toString().equals("Выберите дату")) {
+                    Toast.makeText(getContext(), "Выберите дату", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Navigation.findNavController(view).navigate(R.id.action_bookingFragment_SelectDate_to_bookingFragment_confirmBooking);
+                }
             }));
             binding.fragmentBookingSelectDateRecyclerViewTime.setAdapter(timeAdapter);
             binding.fragmentBookingSelectDateRecyclerViewTime.setLayoutManager(new GridLayoutManager(getContext(), 4, GridLayoutManager.VERTICAL, false));

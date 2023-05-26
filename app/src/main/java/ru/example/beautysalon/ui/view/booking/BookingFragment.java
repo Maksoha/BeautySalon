@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -29,6 +30,8 @@ public class BookingFragment extends Fragment {
     private BookingConfirmViewModel bookingConfirmViewModel;
     private ServiceViewPagerAdapter viewPagerAdapter;
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +43,7 @@ public class BookingFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentBookingBinding.inflate(getLayoutInflater());
+
 
         binding.fragmentBookingButtonToggleGroup.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
             if (isChecked) {
@@ -57,6 +61,7 @@ public class BookingFragment extends Fragment {
             }
 
         });
+
         setTabLayoutService();
         return binding.getRoot();
     }
@@ -64,6 +69,7 @@ public class BookingFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
 
     }
 

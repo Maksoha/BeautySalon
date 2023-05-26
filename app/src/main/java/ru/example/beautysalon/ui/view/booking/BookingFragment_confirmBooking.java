@@ -19,10 +19,16 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
 import android.provider.CalendarContract;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -40,6 +46,8 @@ public class BookingFragment_confirmBooking extends Fragment {
     private String service, specialist, date_time;
     private HomeNotificationViewModel homeNotificationViewModel;
     private BookingConfirmViewModel bookingConfirmViewModel;
+    private MutableLiveData<String> name_check = new MutableLiveData<>();
+    private MutableLiveData<String> phone_check = new MutableLiveData<>();
     private FragmentBookingConfirmBookingBinding binding;
     private static final int REQUEST_CALENDAR_PERMISSION = 1;
 
@@ -117,10 +125,19 @@ public class BookingFragment_confirmBooking extends Fragment {
                     "Услуга: " + service + "\n" +
                             "Специалист: " + specialist + "\n" +
                             "Дата: " + date_time);
-            openCalendar();
 
-            NavController navController = Navigation.findNavController(view);
-            navController.popBackStack(navController.getGraph().getStartDestinationId(), false);
+
+            if (binding.textFieldName.getEditText().length() == 0) {
+                binding.textFieldName.setError("Введите имя");
+            }
+            else if (binding.textFieldPhone.getEditText().length() != 12) {
+                binding.textFieldPhone.setError("Введите номер телефона");
+            }
+            else {
+                openCalendar();
+                NavController navController = Navigation.findNavController(view);
+                navController.popBackStack(navController.getGraph().getStartDestinationId(), false);
+            }
         });
 
 

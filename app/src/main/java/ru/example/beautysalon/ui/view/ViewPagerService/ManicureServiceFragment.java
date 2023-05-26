@@ -4,10 +4,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,6 +27,7 @@ public class ManicureServiceFragment extends Fragment implements ServiceAdapter.
     private FragmentManicureBinding binding;
     private BookingConfirmViewModel bookingConfirmViewModel;
     private ManicureServiceViewModel manicureViewModel;
+    private MutableLiveData<String> address_check = new MutableLiveData<>();
 
 
     @Override
@@ -46,7 +49,12 @@ public class ManicureServiceFragment extends Fragment implements ServiceAdapter.
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        manicureViewModel = new ViewModelProvider(this).get(ManicureServiceViewModel.class);
+        manicureViewModel = new ViewModelProvider(requireActivity()).get(ManicureServiceViewModel.class);
+        bookingConfirmViewModel.getAddress().observe(getViewLifecycleOwner(), address-> {
+            if (address != null) {
+                address_check.setValue(address);
+            }
+        });
         setRecyclerView_service();
     }
 
@@ -63,7 +71,17 @@ public class ManicureServiceFragment extends Fragment implements ServiceAdapter.
             bookingConfirmViewModel.setTypeService(selectedService.getType());
             bookingConfirmViewModel.setNameService(selectedService.getName());
             bookingConfirmViewModel.setPriceService(selectedService.getPrice());
-            Navigation.findNavController(view).navigate(R.id.action_navigation_booking_to_bookingFragment_SelectSpecialist);
+            if (address_check.getValue() != null) {
+                if (!address_check.getValue().isEmpty()) {
+                    Navigation.findNavController(view).navigate(R.id.action_navigation_booking_to_bookingFragment_SelectSpecialist);
+                }
+                else {
+                    Toast.makeText(getContext(), "Введите адрес", Toast.LENGTH_SHORT).show();
+                }
+            }
+            else {
+                Toast.makeText(getContext(), "Введите адрес", Toast.LENGTH_SHORT).show();
+            }
         });
         binding.fragmentManicureRecyclerView.setAdapter(serviceAdapter);
         binding.fragmentManicureRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
